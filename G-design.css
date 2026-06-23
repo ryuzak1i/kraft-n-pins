@@ -127,14 +127,70 @@ main > * {
     bottom: 50%;  
     right: 15%;   
     
-    opacity: 90%; 
+    opacity: 80%; 
     
     width: 280px; 
     height: 330px;
     
     /* Prevents  from accidentally clicking/dragging the background decoration */
-    pointer-events: none;  
+    pointer-events:none;  
     z-index: 1;  
+}
+
+.sparkle-deco1 {
+    position: absolute;
+    top: 55%;
+    left:60%;
+
+    z-index: 3;
+
+    color:#fffbd0;
+    opacity: 100%;
+    transform: translateX(00px) rotate(15deg);
+
+    animation: shine 1.5s ease-in-out infinite;
+
+}
+
+.sparkle-deco1 svg{
+    width: 60px;  /* Put whatever size you want here */
+    height: 40px;
+}
+
+.sparkle-deco2 {
+    position: absolute;
+    top: 55%;
+    left:37%;
+
+    z-index: 3;
+
+    color:#fffbd0;
+    opacity: 100%;
+    transform: translateX(00px) rotate(-15deg);
+
+    animation: shine 1.5s ease-in-out infinite;
+    animation-delay: 0.75s;
+
+}
+
+.sparkle-deco2 svg{
+    width: 60px;  /* Put whatever size you want here */
+    height: 40px;
+}
+
+@keyframes shine {
+    0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 3px #fffbd0);
+    }
+    50% {
+        opacity: 0.2; /* Dims down nicely without disappearing completely */
+        filter: drop-shadow(0 0 0px transparent);
+    }
+}
+
+@keyframes myOpacity{
+    50%{opacity:0%}
 }
 
 main h1{
