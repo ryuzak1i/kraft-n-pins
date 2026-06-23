@@ -24,14 +24,46 @@ body{
     font-weight: 200;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
+
+#brandname {
+    display: flex;
+    align-items: center; /* Vertically aligns logo and text */
+    text-decoration: none;
+    gap: 12px; /* Adds space between the logo and the text */
+    padding: 20px;
+}
+
 #brandname:hover{
     background-color: transparent; /* Stops the background from changing color if desired */
     transform: scale(1.08);
 }
+
+#flower-logo {
+    display: block;
+    width: 30px;
+    height: auto;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.397)) ; 
+    transform: translateX(0px) rotate(10deg);    
+    
+    animation: myRotate;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    animation-timing-function:linear;
+    animation-duration: 5s;
+}
+@keyframes myRotate{
+   0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    } 
+}
 .navbar a{
     color:antiquewhite;
     text-decoration: none;
-    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.397);
     font-family: "Poppins";
     font-weight:700 ;
 
@@ -50,7 +82,7 @@ body{
 #ordernow{
     color: #f19fb3;
     text-shadow: none;
-    border: 1px solid antiquewhite;
+    border: 1px solid #faebd7;
     background-color: antiquewhite;
     border-radius: 50px;
 
@@ -184,7 +216,7 @@ main > * {
         filter: drop-shadow(0 0 3px #fffbd0);
     }
     50% {
-        opacity: 0.2; /* Dims down nicely without disappearing completely */
+        opacity: 0.2; /* Dims down without disappearing completely */
         filter: drop-shadow(0 0 0px transparent);
     }
 }
@@ -211,7 +243,7 @@ main h4{
     font-family: "Poppins";
     font-size: 12px;
     font-weight: 600;
-    color: rgba(62, 31, 31, 0.475);
+    color: rgba(77, 36, 36, 0.475);
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); 
 
     border: 2px solid white;
