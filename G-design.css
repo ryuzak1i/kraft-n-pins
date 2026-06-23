@@ -104,6 +104,39 @@ main > * {
     z-index: 2;
 }
 
+.bg-deco1 {
+    position: absolute;
+    
+    bottom: 100%;  
+    right: 99%;   
+    
+    opacity: 90%; 
+    
+    width: 350px; 
+    height: 330px;
+    
+    /* Prevents  from accidentally clicking/dragging the background decoration */
+    pointer-events: none;  
+    z-index: 1;  
+}
+
+.bg-deco2 {
+    position: absolute;
+    transform: translateX(100px) rotate(25deg);
+    
+    bottom: 50%;  
+    right: 15%;   
+    
+    opacity: 90%; 
+    
+    width: 280px; 
+    height: 330px;
+    
+    /* Prevents  from accidentally clicking/dragging the background decoration */
+    pointer-events: none;  
+    z-index: 1;  
+}
+
 main h1{
     font-family: "Poppins";
     font-size: 80px;
