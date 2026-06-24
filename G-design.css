@@ -73,7 +73,13 @@ body{
 }
 .navbar a:hover{
     transform: scale(1.05);
-    
+    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.397);
+}
+.navbar a.active{
+    transform: scale(1.05);
+    color: #fffbd0;
+    text-shadow: 0px 2px 2px rgb(183, 77, 77);
+    text-decoration: underline 2px antiquewhite;
 }
 .navbar li{
     float:left;
@@ -100,6 +106,7 @@ body{
     padding: 8px 20px;
     display: inline-block;
 }
+
 main{
     display: flex;
     justify-content: center; /* Centers the h1 horizontally (Left to Right) */
@@ -227,7 +234,9 @@ main > * {
 .swirl-deco1{
     position: absolute;
     top: 60%;
-    left:-4%;
+    left:-5%;
+
+    pointer-events: none;  
 }
 
 .swirl-deco1 img{
