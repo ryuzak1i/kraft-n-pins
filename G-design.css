@@ -224,6 +224,61 @@ main > * {
 @keyframes myOpacity{
     50%{opacity:0%}
 }
+.swirl-deco1{
+    position: absolute;
+    top: 60%;
+    left:-4%;
+}
+
+.swirl-deco1 img{
+    display: block;
+    width: 450px;
+    opacity: 50%;
+
+    animation: mySwirl;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    animation-timing-function:linear;
+    animation-duration: 5s;
+}
+
+.swirl-deco2{
+    position: absolute;
+    top: 1%;
+    left:90%;
+}
+
+.swirl-deco2 img{
+    display: block;
+    width: 300px;
+    opacity: 50%;
+
+    animation: mySwirl2;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    animation-timing-function:linear;
+    animation-duration: 5s;
+}
+
+@keyframes mySwirl {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    } 
+}
+
+@keyframes mySwirl2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    } 
+}
 
 main h1{
     font-family: "Poppins";
