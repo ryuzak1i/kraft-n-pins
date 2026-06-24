@@ -145,47 +145,38 @@ main > * {
 
 .bg-deco1 {
     position: absolute;
+    top: 3%;  
+    left: -3%;   
     
-    bottom: 100%;  
-    right: 99%;   
-    
-    opacity: 90%; 
-    
-    width: 350px; 
-    height: 330px;
-    
-    /* Prevents  from accidentally clicking/dragging the background decoration */
     pointer-events: none;  
     z-index: 1;  
 }
 
+.bg-deco1 img{
+    display: block;
+
+    width: 330px;
+    height: 330px;
+    opacity: 90%;
+}
+
 .bg-deco2 {
     position: absolute;
-    transform: translateX(100px) rotate(25deg);
+    top:59%;  
+    left: 85%;   
     
-    bottom: 50%;  
-    right: 15%;   
-    
-    opacity: 80%; 
-    
-    width: 280px; 
-    height: 330px;
-    
-    /* Prevents  from accidentally clicking/dragging the background decoration */
-    pointer-events:none;  
+    pointer-events: none;  
     z-index: 1;  
 }
 
-.bg-deco2 svg {
-    width: 280px; 
-    height: 330px;
-    
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE/Edge */
-    user-select: none;         /* Standard */
-    -webkit-user-drag: none;
-    
+.bg-deco2 img{
+    display: block;
+
+    width: 350px;
+    height: 350px;
+    opacity: 90%;
+
+    transform: translateX(00px) rotate(25deg);
 }
 
 .sparkle-deco1 {
