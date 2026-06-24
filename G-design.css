@@ -176,6 +176,18 @@ main > * {
     z-index: 1;  
 }
 
+.bg-deco2 svg {
+    width: 280px; 
+    height: 330px;
+    
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+    -webkit-user-drag: none;
+    
+}
+
 .sparkle-deco1 {
     position: absolute;
     top: 55%;
@@ -194,6 +206,12 @@ main > * {
 .sparkle-deco1 svg{
     width: 60px;  /* Put whatever size you want here */
     height: 40px;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+    -webkit-user-drag: none;
 }
 
 .sparkle-deco2 {
@@ -215,6 +233,66 @@ main > * {
 .sparkle-deco2 svg{
     width: 60px;  /* Put whatever size you want here */
     height: 40px;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+    -webkit-user-drag: none;
+}
+
+.sparkle-big3 {
+    position: absolute;
+    top: 53%;
+    left: 3%;
+
+    z-index: 3;
+
+    color:#fffbd0;
+    opacity: 100%;
+    transform: translateX(00px) rotate(-20deg);
+
+    animation: shine 2.5s ease-in-out infinite;
+    animation-delay: 0.75s;
+
+}
+
+.sparkle-big3 svg{
+    width: 180px;  /* Put whatever size you want here */
+    height: 180px;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+    -webkit-user-drag: none;
+}
+
+.sparkle-big4 {
+    position: absolute;
+    top: 25%;
+    left: 91%;
+
+    z-index: 3;
+
+    color:#fffbd0;
+    opacity: 100%;
+    transform: translateX(00px) rotate(20deg);
+
+    animation: shine 2.5s ease-in-out infinite;
+    animation-delay: 0.75s;
+
+}
+
+.sparkle-big4 svg{
+    width: 160px;  /* Put whatever size you want here */
+    height: 180px;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+    -webkit-user-drag: none;
 }
 
 @keyframes shine {
@@ -223,7 +301,7 @@ main > * {
         filter: drop-shadow(0 0 3px #fffbd0);
     }
     50% {
-        opacity: 0.2; /* Dims down without disappearing completely */
+        opacity: 0.2;
         filter: drop-shadow(0 0 0px transparent);
     }
 }
