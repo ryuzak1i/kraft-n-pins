@@ -1,8 +1,11 @@
+/*HOME TAB*/
+
 * {
     box-sizing: border-box; 
     margin: 0;
     padding: 0;
 }
+
 body{
     background-image: linear-gradient(#fff9c0, #ffa3b3);;
 }
@@ -52,6 +55,7 @@ body{
     animation-timing-function:linear;
     animation-duration: 5s;
 }
+
 @keyframes myRotate{
    0% {
         transform: rotate(0deg);
@@ -60,6 +64,7 @@ body{
         transform: rotate(360deg);
     } 
 }
+
 .navbar a{
     color:antiquewhite;
     text-decoration: none;
@@ -71,16 +76,19 @@ body{
     display: block;
     text-align: center;
 }
+
 .navbar a:hover{
     transform: scale(1.05);
     text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.397);
 }
+
 .navbar a.active{
     transform: scale(1.05);
     color: #fffbd0;
     text-shadow: 0px 2px 2px rgb(183, 77, 77);
     text-decoration: underline 2px antiquewhite;
 }
+
 .navbar li{
     float:left;
 }
@@ -95,6 +103,7 @@ body{
     padding: 8px 20px;
     display: inline-block;
 }
+
 #ordernow:hover{
     color: #f19fb3;
     text-shadow: none;
@@ -135,9 +144,9 @@ main::before {
     opacity: 0.10;                 
     
     /* Push it behind your text content */
-    z-index: 1; 
-    
+    z-index: 1;
 }
+
 main > * {
     position: relative;
     z-index: 2;
@@ -157,7 +166,7 @@ main > * {
 
     width: 330px;
     height: 330px;
-    opacity: 90%;
+    opacity: 70%;
 }
 
 .bg-deco2 {
@@ -174,7 +183,7 @@ main > * {
 
     width: 350px;
     height: 350px;
-    opacity: 90%;
+    opacity: 70%;
 
     transform: translateX(00px) rotate(25deg);
 }
@@ -372,6 +381,7 @@ main h1{
     margin-bottom: 8px; 
     line-height: 2.1;
 }
+
 main h4{
     font-family: "Poppins";
     font-size: 12px;
@@ -396,12 +406,14 @@ main h4{
     animation-timing-function: ease-out;
     animation-duration: 5s;
 }
+
 @keyframes myColor {
     0%{color: #fff6b0;}
     20%{color: #fdf6c6;}
     40%{color: #ffffff;}
     
 }
+
 main h3{
     font-family: "Poppins";
     font-size: 20px;
@@ -414,8 +426,8 @@ main h3{
     display: flex;
     flex-direction: column; /* Forces content to stack vertically */
     align-items: center;
-   
 }
+
 .button-container {
     display: flex;
     flex-direction: row;
@@ -436,6 +448,7 @@ main h3{
    
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .btn-yellow {
     background-color: #fffbd0; 
     color: #e988a0;          
@@ -454,8 +467,57 @@ main h3{
     background-color: #fff9c0;
 
 }
+
 .btn-white:hover  {
     transform: translateY(-2px);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 
 }
+
+/*SHOP-PINS TAB*/
+
+.shop{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.sizes{    
+    font-family: "Poppins";
+    border: 2px solid #e988a0;
+    background-color: #e988a0;
+    border-radius: 20px;
+    min-height: 80px;
+    width: 800px;
+
+
+}
+
+/*HOW-TO-ORDER TAB*/
+.how-to-order{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.circle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; 
+    align-items: center;
+    
+    width: 100%; 
+    
+    gap: 100px;
+}
+.solid-circle{
+    height: 180px;
+    width: 180px;
+    background-color: #e988a0;
+
+    border: 9px solid #ffffff;
+    border-radius: 50%;
+}
+
+
