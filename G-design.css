@@ -80,14 +80,8 @@ header {
 
 .navbar a:hover {
     transform: scale(1.05);
+    color: #fdf6c6;
     text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.397);
-}
-
-.navbar a.active {
-    transform: scale(1.05);
-    color: #fffbd0;
-    text-shadow: 0px 2px 2px rgb(183, 77, 77);
-    text-decoration: underline 2px antiquewhite;
 }
 
 #ordernow {
@@ -141,37 +135,164 @@ header {
 }
 
 /* BACKGROUND ACCENTS (HOME) */
-.bg-deco1 { position: absolute; top: 3%; left: -3%; pointer-events: none; z-index: 1; }
-.bg-deco1 img { display: block; width: 330px; height: 330px; opacity: 70%; }
-
-.bg-deco2 { position: absolute; top: 59%; left: 85%; pointer-events: none; z-index: 1; }
-.bg-deco2 img { display: block; width: 350px; height: 350px; opacity: 70%; transform: rotate(25deg); }
-
-.sparkle-deco1 { position: absolute; top: 55%; left: 60%; z-index: 3; color: #fffbd0; animation: shine 1.5s ease-in-out infinite; }
-.sparkle-deco1 svg { width: 60px; height: 40px; user-select: none; }
-
-.sparkle-deco2 { position: absolute; top: 55%; left: 37%; z-index: 3; color: #fffbd0; animation: shine 1.5s ease-in-out infinite; animation-delay: 0.75s; }
-.sparkle-deco2 svg { width: 60px; height: 40px; user-select: none; }
-
-.sparkle-big3 { position: absolute; top: 53%; left: 3%; z-index: 3; color: #fffbd0; animation: shine 2.5s ease-in-out infinite; animation-delay: 0.75s; }
-.sparkle-big3 svg { width: 180px; height: 180px; user-select: none; }
-
-.sparkle-big4 { position: absolute; top: 25%; left: 91%; z-index: 3; color: #fffbd0; animation: shine 2.5s ease-in-out infinite; animation-delay: 0.75s; }
-.sparkle-big4 svg { width: 160px; height: 180px; user-select: none; }
-
-@keyframes shine {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 3px #fffbd0); }
-    50% { opacity: 0.2; filter: drop-shadow(0 0 0px transparent); }
+.bg-deco1 { 
+    position: absolute; 
+    top: 5%; 
+    left: -3%; 
+    pointer-events: none; 
+    z-index: 1; 
 }
 
-.swirl-deco1 { position: absolute; top: 60%; left: -5%; pointer-events: none; }
-.swirl-deco1 img { display: block; width: 450px; opacity: 50%; animation: mySwirl 5s linear infinite; }
+.bg-deco1 img { 
+    display: block; 
+    width: 400px; 
+    height: 400px; 
+    opacity: 70%; 
+}
 
-.swirl-deco2 { position: absolute; top: 1%; left: 90%; }
-.swirl-deco2 img { display: block; width: 300px; opacity: 50%; animation: mySwirl2 5s linear infinite; }
+.bg-deco2 { 
+    position: absolute; 
+    top: 62%; 
+    left: 85%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
 
-@keyframes mySwirl { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes mySwirl2 { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
+.bg-deco2 img { 
+    display: block; 
+    width: 400px; 
+    height: 400px; 
+    opacity: 70%; 
+    transform: rotate(25deg); 
+}
+
+.sparkle-deco1 { 
+    position: absolute; 
+    top: 59%; 
+    left: 59%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    transform: rotate(16deg);
+    animation: shine 1.5s ease-in-out infinite; 
+}
+
+.sparkle-deco1 svg { 
+    width: 60px; 
+    height: 40px; 
+    user-select: none; 
+}
+
+.sparkle-deco2 { 
+    position: absolute; 
+    top: 58%; 
+    left: 38%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    transform: rotate(-16deg);
+
+    animation: shine 1.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle-deco2 svg { 
+    width: 60px; 
+    height: 40px; 
+    user-select: none; 
+}
+
+.sparkle-big3 { 
+    position: absolute; 
+    top: 53%; 
+    left: 3%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle-big3 svg { 
+    width: 180px; 
+    height: 180px; 
+    user-select: none; 
+}
+
+.sparkle-big4 { 
+    position: absolute; 
+    top: 28%; 
+    left: 91%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+.sparkle-big4 svg { 
+    width: 160px; 
+    height: 180px; 
+    user-select: none; 
+}
+
+@keyframes shine {
+    0%, 100% { 
+        opacity: 1; 
+        filter: drop-shadow(0 0 3px #fffbd0); 
+    }
+    50% { 
+        opacity: 0.2; 
+        filter: drop-shadow(0 0 0px transparent); 
+    }
+}
+
+.swirl-deco1 { 
+    position: absolute; 
+    top: 59%; 
+    left: -5%; 
+    
+    pointer-events: none; 
+}
+
+.swirl-deco1 img { 
+    display: block; 
+    width: 450px; 
+    opacity: 50%; 
+
+    animation: mySwirl 5s linear infinite; 
+}
+
+.swirl-deco2 { 
+    position: absolute; 
+    top: 3%; 
+    left: 88%; 
+}
+
+.swirl-deco2 img { 
+    display: block; 
+    width: 420px; 
+    opacity: 50%; 
+
+    animation: mySwirl2 5s linear infinite; 
+}
+
+@keyframes mySwirl { 
+    0% { 
+        transform: rotate(0deg); 
+    } 
+    100% { 
+        transform: rotate(360deg); 
+    } 
+}
+
+@keyframes mySwirl2 { 
+    0% { 
+        transform: rotate(0deg); 
+    } 
+    100% { 
+        transform: rotate(-360deg); 
+    } 
+}
 
 /* HERO ELEMENTS */
 .heading {
@@ -231,10 +352,28 @@ header {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-yellow { background-color: #fffbd0; color: #e988a0; box-shadow: 0px 4px 10px rgba(241, 159, 179, 0.4); }
-.btn-white { background-color: #ffffff; color: #f19fb3; box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05); }
-.btn-yellow:hover { transform: translateY(-2px); box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); background-color: #fff9c0; }
-.btn-white:hover { transform: translateY(-2px); box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); }
+.btn-yellow { 
+    background-color: #fffbd0; 
+    color: #e988a0; 
+    box-shadow: 0px 4px 10px rgba(241, 159, 179, 0.4); 
+}
+
+.btn-white { 
+    background-color: #ffffff; 
+    color: #f19fb3; 
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05); 
+}
+
+.btn-yellow:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); 
+    background-color: #fff9c0; 
+}
+
+.btn-white:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); 
+}
 
 /* SHOP SECTION SETUPS */
 .shop {
