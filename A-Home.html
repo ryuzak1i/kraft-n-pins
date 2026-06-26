@@ -7,39 +7,35 @@
     <link rel="stylesheet" href="G-design.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/new-smile" rel="stylesheet">
-    <!-- Ensure the viewBox is present so the internal artboard scales proportionally -->
-   
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
     <header>
         <nav class="navbar">
             <ul>
                 <li>
-                    <a href="A-Home.html" id="brandname">
+                    <a href="#home" id="brandname">
                         <b>kraft n' pins</b>
                         <img id="flower-logo" src="images/flower.png" alt="Flower Logo">
                     </a>
                 </li>
-
-                <li><a href="A-Home.html" class="active">Home</a></li>
-                <li><a href="B-Shop.html">Shop Pins</a></li>
-                <li><a href="C-HowOrder.html">How to Order</a></li>
-                <li><a href="D-About.html">About Us</a></li>
-                <li><a href="E-FAQ.html">FAQs</a></li>
-                <li><a href="B-Shop.html" id="ordernow">Order now</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#shop">Shop Pins</a></li>
+                <li><a href="#how-to-order">How to Order</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#faq">FAQs</a></li>
+                <li><a href="#how-to-order" id="ordernow">Order now</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main id="home" class="section-container">
         <div class="bg-deco1">
-            <img src="images/starpic.png" >
+            <img src="images/starpic.png" alt="decoration">
         </div>
-        
         <div class="bg-deco2">
-            <img src="images/starpic.png" >
+            <img src="images/starpic.png" alt="decoration">
         </div>
 
         <div class="sparkle-deco1">
@@ -47,19 +43,16 @@
                 <path d="M12 2c0 5.523 4.477 10 10 10-5.523 0-10 4.477-10 10-0-5.523-4.477-10-10-10 5.523 0 10-4.477 10-10z"/>
             </svg>
         </div>
-
         <div class="sparkle-deco2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2c0 5.523 4.477 10 10 10-5.523 0-10 4.477-10 10-0-5.523-4.477-10-10-10 5.523 0 10-4.477 10-10z"/>
             </svg>
         </div>
-
         <div class="sparkle-big3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2c0 5.523 4.477 10 10 10-5.523 0-10 4.477-10 10-0-5.523-4.477-10-10-10 5.523 0 10-4.477 10-10z"/>
             </svg>
         </div>
-
         <div class="sparkle-big4">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2c0 5.523 4.477 10 10 10-5.523 0-10 4.477-10 10-0-5.523-4.477-10-10-10 5.523 0 10-4.477 10-10z"/>
@@ -67,26 +60,123 @@
         </div>
 
         <div class="swirl-deco1">
-            <img src="images/swirl.png">
+            <img src="images/swirl.png" alt="decoration">
         </div>
-
         <div class="swirl-deco2">
-            <img src="images/swirl.png">
+            <img src="images/swirl.png" alt="decoration">
         </div>
 
-
-        <section >
+        <section class="hero-content">
             <h4 class="est"> ⋆  Since 2025 | Cavite & Manila  ⋆ </h4>
             <h1 class="heading">✧ krafting your designs to life ⋆˚꩜</h1>
             <h3 class="description"> cute, custom, & budget-friendly 
-            <br> anik-anik for your bags and IDs >.< </h3>
+            <br> anik-anik for your bags and IDs &gt;.&lt; </h3>
 
             <div class="button-container">
-                <a href="C-HowOrder.html" class="btn btn-yellow">Get Krafting!</a>
-                <a href="B-Shop.html" class="btn btn-white">View Sizes & Prices</a>
+                <a href="#how-to-order" class="btn btn-yellow">Get Krafting!</a>
+                <a href="#shop" class="btn btn-white">View Sizes & Prices</a>
             </div>
         </section> 
-</main>
+    </main>
+
+    <main id="shop" class="section-container">
+        <section class="shop">
+            <h1 class="heading-secondary"> 𑣲⋆ pick your perfect size!</h1>
+            <h4 class="subheading-text">whether you want a tiny detail for your ID or a cute charm for your bags, we've got you covered.</h4>
+            
+            <div class="sizes">
+                <div class="radio-group">
+                    <input type="radio" id="25" name="size" value="25">
+                    <label for="25">25mm</label>
+
+                    <input type="radio" id="32" name="size" value="32">
+                    <label for="32">32mm</label>
+
+                    <input type="radio" id="58" name="size" value="58">
+                    <label for="58">58mm</label>
+                </div>
+            </div>
+
+            <div class="small">
+                <div class="radio-group">
+                    <input type="radio" id="solo" name="qty" value="solo">
+                    <label for="solo">solo</label>
+
+                    <input type="radio" id="trio" name="qty" value="trio">
+                    <label for="trio">duo</label>
+
+                    <input type="radio" id="squad" name="qty" value="squad">
+                    <label for="squad">trio</label>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="how-to-order" class="section-container order-layout">
+        <section class="order-intro">
+            <h1 class="how-to-order-title">✦  how to order ?</h1>
+            <h4 class="how-to-order-badge">three simple steps to get your hands on custom anik-anik ♡ </h4>
+        </section>
+        
+        <section class="circle-row">
+            <div class="solid-circle">
+                <i class="fa-solid fa-arrow-pointer step-icon"></i>
+            </div>
+            <div class="solid-circle">
+                <i class="fa-solid fa-image step-icon"></i>
+            </div>
+            <div class="solid-circle">
+                <i class="fa-solid fa-paper-plane step-icon"></i>
+            </div>
+        </section>
+        
+        <section class="boxes-row">
+            <div class="box"> 
+                <h3 class="steps">STEP 1</h3>
+                <p class="step-title">Pick Your Size & Bundle</p>
+                <p class="order-description">Choose from <b>25mm, 32mm, or 58mm</b> sizes and pick a bundle that fits your budget. </p>
+            </div>
+            <div class="box">
+                <h3 class="steps">STEP 2</h3>
+                <p class="step-title">Prepare Your Design</p>
+                <p class="order-description">Got your favorite image? Great! No design yet? We'll help you style a <b>simple design for free!</b></p>
+            </div>
+            <div class="box">
+                <h3 class="steps">STEP 3</h3>
+                <p class="step-title">Slide into our DMs!</p>
+                <p class="order-description">Send your order form and high-quality files directly to our Instagram <b>@kraftnpins</b> or Email: <b>kraftnpins@gmail.com</b></p>
+            </div>
+        </section>
+    </main>
+
+    <main id="about" class="section-container text-layout">
+        <section class="center-text-block">
+            <h1 class="heading-secondary">about us</h1>
+            <h4 class="subheading-accent">two sisters, one passion</h4>
+            <div class="paragraph-container">
+                <p>Hi there, bestie! Welcome to Kraft N' Pins! We are two sisters who officially started this little passion project back in February 2025.</p>
+                <p>As students ourselves, we completely get the obsession with collecting anik-anik — because let's be real, our school IDs, tote bags, and backpacks look a million times better when they're decked out in cute stuff that shows off our personality!</p>
+                <p>We wanted to create an arts and crafts space that is 100% student-friendly. That means no scary minimum orders, no overwhelming prices, just pure creativity tailored to your budget.</p>
+                <p>Whether you're repping your favorite anime, showing off your fandom, flexing your school org, or just want a picture of your pet on your lanyard, we're here for it! Based happily in Imus, Cavite and Manila, we are always ready to bring your imagination to life.</p>
+            </div>
+        </section>
+    </main>
+
+    <main id="faq" class="section-container text-layout">
+        <section class="center-text-block">
+            <h1 class="heading-secondary">Got Questions?</h1>
+            <h4 class="subheading-accent">Here's everything you need to know.</h4>
+            <div class="faq-list">
+                <p class="faq-item">Can I customize my own design for the button pins?</p>
+                <p class="faq-item">How do I send my design?</p>   
+                <p class="faq-item">What if I don't have a design yet? Can you make one for me?</p>   
+                <p class="faq-item">Is there a minimum order quantity (MOQ)?</p>    
+                <p class="faq-item">How long does it take to process my order?</p>
+                <p class="faq-item">How will I receive my pins?</p>   
+            </div>
+            <h4 class="faq-footer">If your question isn't listed here, feel free to message us anytime — we're happy to help! 💌</h4>
+        </section>
+    </main>
+
 </body>
 </html>
-
