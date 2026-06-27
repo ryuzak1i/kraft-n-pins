@@ -180,8 +180,8 @@ header {
 
 .sparkle-deco1 { 
     position: absolute; 
-    top: 59%; 
-    left: 59%; 
+    top: 56%; 
+    left: 60%; 
     z-index: 3; 
     color: #fffbd0; 
     transform: rotate(16deg);
@@ -189,7 +189,7 @@ header {
 }
 
 .sparkle-deco1 svg { 
-    width: 4vw;
+    width: 3vw;
     max-width: 60px; 
     height: auto; 
     user-select: none; 
@@ -197,8 +197,8 @@ header {
 
 .sparkle-deco2 { 
     position: absolute; 
-    top: 58%; 
-    left: 38%; 
+    top: 56%; 
+    left: 36%; 
     z-index: 3; 
     color: #fffbd0; 
     transform: rotate(-16deg);
@@ -392,18 +392,34 @@ header {
 }
 
 .heading-secondary {
-    font-size: 2.8rem; /* Adjusted from 50px to rem layout */
-    font-weight: 900;
+    font-size: 3.8rem; /* Converted from 60px to rem */
+    font-weight: 990;
     color: #ffffff;
-    text-shadow: 0px 3px 3px rgb(112, 80, 80), 0px 4px 4px rgb(255, 212, 127), 0px 6px 3px rgb(255, 119, 173);
+    text-shadow: 0px 3px 3px rgb(112, 80, 80), 0px 4px 4px rgb(255, 212, 127), 0px 8px 3px rgb(255, 119, 173);
     text-align: center;
+    line-height: 1.3;
 }
 
 .subheading-text {
-    font-size: 1rem;
-    color: #5e2e3a;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff6b0;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); 
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); 
+    border: 2px solid rgba(255, 255, 255, 0.756);
+    background-color: #f19fb3;
+    border-radius: 20px;
     text-align: center;
-    margin-bottom: 20px;
+    padding: 4px 15px;
+    width: fit-content;
+    margin: 10px auto 0 auto;
+    animation: myColor 5s ease-out infinite;
+}
+
+@keyframes myColor {
+    0%, 100% { color: #fff6b0; }
+    20% { color: #fdf6c6; }
+    40% { color: #ffffff; }
 }
 
 .sizes, .small {    
@@ -443,7 +459,7 @@ header {
 }
 
 .how-to-order-title {
-    font-size: 3.5rem; /* Converted from 60px to rem */
+    font-size: 3.8rem; /* Converted from 60px to rem */
     font-weight: 990;
     color: #ffffff;
     text-shadow: 0px 3px 3px rgb(112, 80, 80), 0px 4px 4px rgb(255, 212, 127), 0px 8px 3px rgb(255, 119, 173);
@@ -464,6 +480,14 @@ header {
     padding: 4px 15px;
     width: fit-content;
     margin: 10px auto 0 auto;
+    animation: myColor 5s ease-out infinite;
+}
+
+@keyframes myColor {
+    0%, 100% { color: #fff6b0; }
+    20% { color: #fdf6c6; }
+    40% { color: #ffffff; }
+
 }
 
 .circle-row {
@@ -488,7 +512,7 @@ header {
 }
 
 .solid-circle {
-    height: 120px; /* Scaled down slightly to fit medium monitors without breaking boundaries */
+    height: 120px; 
     width: 120px;
     background-color: #e988a0;
     border: 7px solid #ffffff;
@@ -509,6 +533,8 @@ header {
 .solid-circle:hover .step-icon {
     color: #fdf6c6;
     transform: scale(1.15) rotate(-10deg);
+
+    filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.4));
 }
 
 .boxes-row {
@@ -543,9 +569,10 @@ header {
 }
 
 .order-description {
-    text-align: center;
+    text-align: justify;
+    padding: 8%;
     font-size: 0.85rem;
-    color: #5e2e3a;
+    color: #5e2e3ac8;;
     line-height: 1.4;
 }
 
@@ -567,19 +594,42 @@ header {
 }
 
 .subheading-accent {
-    font-size: 1.2rem;
-    color: #a55166;
+    ffont-size: 0.9rem;
     font-weight: 600;
-    margin: 10px 0 25px 0;
+    color: #fff6b0;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); 
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); 
+    border: 2px solid rgba(255, 255, 255, 0.756);
+    background-color: #f19fb3;
+    border-radius: 20px;
+    text-align: center;
+    padding: 4px 15px;
+    width: fit-content;
+    margin: 10px auto 0 auto;
+    margin-bottom: 20px;;
+    animation: myColor 5s ease-out infinite;
+}
+
+@keyframes myColor {
+    0%, 100% { color: #fff6b0; }
+    20% { color: #fdf6c6; }
+    40% { color: #ffffff; }
 }
 
 .paragraph-container p {
     font-size: 0.95rem;
-    color: #5e2e3a;
+    color: #5e2e3ac8;
     line-height: 1.6;
     margin-bottom: 15px;
+    padding: 24px;
+    text-align: justify;
+
 }
 
+#end-statement{
+    font-size: 1.2rem;
+    text-align: center;
+}
 .paragraph-container p:last-child {
     margin-bottom: 0;
 }
@@ -645,25 +695,25 @@ header {
     /* --- Top Left Star --- */
     .bg-deco1 {
         top: 2%;
-        left: -6%; /* Pushes further left out of the way */
+        left: -6%; 
     }
     .bg-deco1 img {
-        width: 20vw; /* Scales down size */
+        width: 20vw; 
     }
 
     /* --- Top Right Swirl --- */
     .swirl-deco2 {
         top: 0%;
-        left: 88%; /* Holds the edge tight */
+        left: 88%; 
     }
     .swirl-deco2 img {
-        width: 22vw; /* Scales down size */
+        width: 22vw; 
     }
 
     /* --- Bottom Left Swirl --- */
     .swirl-deco1 {
-        top: 64%;  /* Lowers it slightly away from text */
-        left: -8%; /* Pushes further left */
+        top: 64%;  
+        left: -8%; 
     }
     .swirl-deco1 img {
         width: 24vw; /* Scales down size */
@@ -671,21 +721,21 @@ header {
 
     /* --- Bottom Right Star --- */
     .bg-deco2 {
-        top: 66%;  /* Lowers it slightly */
-        left: 84%; /* Pushes further right away from the text buttons */
+        top: 66%;  
+        left: 84%; 
     }
     .bg-deco2 img {
-        width: 20vw; /* Scales down size */
+        width: 20vw; 
     }
 
     /* --- Small Accent Sparkles (Text Side) --- */
     .sparkle-deco1 {
         top: 60%;
-        left: 62%; /* Widens spacing from text */
+        left: 62%; 
     }
     .sparkle-deco2 {
         top: 59%;
-        left: 34%; /* Widens spacing from text */
+        left: 34%; 
     }
 
     /* --- Big Corner Sparkles --- */
