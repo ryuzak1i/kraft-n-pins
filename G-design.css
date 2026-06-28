@@ -618,7 +618,7 @@ header {
 
 .paragraph-container p {
     font-size: 0.95rem;
-    color: #5e2e3ac8;
+    color: #5e2e3adc;
     line-height: 1.6;
     margin-bottom: 15px;
     padding: 24px;
@@ -629,6 +629,8 @@ header {
 #end-statement{
     font-size: 1.2rem;
     text-align: center;
+    color: #a55166;
+    
 }
 .paragraph-container p:last-child {
     margin-bottom: 0;
@@ -653,7 +655,7 @@ header {
 }
 
 .faq-footer {
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     color: #5e2e3a;
     font-weight: 600;
     line-height: 1.4;
@@ -754,4 +756,8 @@ header {
     .sparkle-big4 svg {
         width: 7vw;
     }
+}
+::selection {
+  background-color: #e988a0b1; /* The highlight background color */
+  color: #ffffff;            /* The text color inside the highlight */
 }
