@@ -495,7 +495,7 @@ input[type="radio"]{
 
 .pop-box h3 {
     color: #e988a0;
-    margin-bottom: 8px;
+    margin-bottom: 24px;
     font-weight: 800;
     text-shadow:none;
 }
@@ -548,6 +548,7 @@ input[type="radio"]{
     color: #ffffff;
     font-weight: 400;
     font-style: oblique;
+    padding-bottom: 14px;
 }
 #amount{
     font-size: xx-large;
@@ -557,6 +558,20 @@ input[type="radio"]{
     text-shadow: none;
     font-size: small;
     color: #ffffff;
+
+    padding-top: 6px;
+}
+#savings{
+    text-shadow: none;
+    color: #a55166;
+    font-size: small;
+
+    border: 2px solid #fdf6c6;
+    border-radius: 16px;
+    background-color: #fdf6c6;
+
+    margin-top: 6px;
+    
 }
 
 .sizes:has(input[id="25"]:checked) ~ .sizes-popup .pop-25 {
