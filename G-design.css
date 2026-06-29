@@ -517,7 +517,12 @@ input[type="radio"]{
     border-radius: 16px;       
     padding: 12px;           
     text-align: center;      
-    /*box-shadow: 4px 5px 0px #ef6a80a8;*/
+    
+    border: 6px solid transparent; /* Placeholder to prevent layout jumping */
+    transition: 
+        transform 1.4s cubic-bezier(0.25, 1, 0.5, 1), 
+        border-color 2.0s cubic-bezier(0.25, 1, 0.5, 1), 
+        box-shadow 1.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .pop-32-solo, 
@@ -529,7 +534,12 @@ input[type="radio"]{
     border-radius: 16px;       
     padding: 12px;           
     text-align: center;      
-    /*box-shadow: 4px 5px 0px #ef6a80a8;*/
+    
+    border: 6px solid transparent; /* Placeholder to prevent layout jumping */
+    transition: 
+        transform 1.4s cubic-bezier(0.25, 1, 0.5, 1), 
+        border-color 2.0s cubic-bezier(0.25, 1, 0.5, 1), 
+        box-shadow 1.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .pop-58-solo, 
@@ -541,7 +551,12 @@ input[type="radio"]{
     border-radius: 16px;       
     padding: 12px;           
     text-align: center;      
-    /*box-shadow: 4px 5px 0px #ef6a80a8;*/
+    
+    border: 6px solid transparent; /* Placeholder to prevent layout jumping */
+    transition: 
+        transform 1.4s cubic-bezier(0.25, 1, 0.5, 1), 
+        border-color 2.0s cubic-bezier(0.25, 1, 0.5, 1), 
+        box-shadow 1.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #qty{
@@ -598,9 +613,20 @@ input[type="radio"]{
     }
 }
 
-.sizes-popup:hover{
-    scale: 1.30px;
+.pop-25-solo:hover,
+.pop-25-trio:hover,
+.pop-25-squad:hover,
+.pop-32-solo:hover,
+.pop-32-duo:hover,
+.pop-32-squad:hover,
+.pop-58-solo:hover,
+.pop-58-duo:hover,
+.pop-58-squad:hover{
+    transform: scale(1.05) ;
+    border: 6px solid #fdf6c6;
+    box-shadow: 2px 3px 2px #a55166cd;
 }
+
 
 /* HOW TO ORDER */
 .order-layout {
