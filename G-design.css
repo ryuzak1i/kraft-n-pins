@@ -532,6 +532,18 @@ input[type="radio"]{
     /*box-shadow: 4px 5px 0px #ef6a80a8;*/
 }
 
+.pop-58-solo, 
+.pop-58-duo, 
+.pop-58-squad {
+    flex: 1;                   /* Makes all three boxes exactly the same width */
+    max-width: 280px;         
+    background-color: #f19fb3;
+    border-radius: 16px;       
+    padding: 12px;           
+    text-align: center;      
+    /*box-shadow: 4px 5px 0px #ef6a80a8;*/
+}
+
 #qty{
     color: #ffffff;
     font-weight: 400;
@@ -544,6 +556,7 @@ input[type="radio"]{
 #qty-descrip{
     text-shadow: none;
     font-size: small;
+    color: #ffffff;
 }
 
 .sizes:has(input[id="25"]:checked) ~ .sizes-popup .pop-25 {
