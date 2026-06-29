@@ -480,11 +480,15 @@ input[type="radio"]{
     border-radius: 20px;
     padding: 20px;
     margin-top: 20px;
+
     width: 800px;
+    height: 250px;
     max-width: 800px;
+    
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1), 4px 6px 0px #ef6a80a8;
     text-align: center;
-    color: #a55166;
+    color: #fdf6c6;
+    text-shadow: 0px 2px 3px #5e2e3ab0;
     animation: fadeIn 0.3s ease-in-out;
     
 }
@@ -493,12 +497,14 @@ input[type="radio"]{
     color: #e988a0;
     margin-bottom: 8px;
     font-weight: 800;
+    text-shadow:none;
 }
 .qty-box {
     display: flex;             
     justify-content: center;   
     gap: 15px;                 
-    width: 100%;              
+    width: 100%;    
+    height: 150px;          
     margin-top: 15px;        
 }
 
@@ -507,11 +513,37 @@ input[type="radio"]{
 .pop-25-squad {
     flex: 1;                   /* Makes all three boxes exactly the same width */
     max-width: 280px;         
-    background-color: #fff9c0ac;
-    border-radius: 12px;       
+    background-color: #f19fb3;
+    border-radius: 16px;       
     padding: 12px;           
     text-align: center;      
-    box-shadow: 4px 5px 0px #ef6a80a8;
+    /*box-shadow: 4px 5px 0px #ef6a80a8;*/
+}
+
+.pop-32-solo, 
+.pop-32-duo, 
+.pop-32-squad {
+    flex: 1;                   /* Makes all three boxes exactly the same width */
+    max-width: 280px;         
+    background-color: #f19fb3;
+    border-radius: 16px;       
+    padding: 12px;           
+    text-align: center;      
+    /*box-shadow: 4px 5px 0px #ef6a80a8;*/
+}
+
+#qty{
+    color: #ffffff;
+    font-weight: 400;
+    font-style: oblique;
+}
+#amount{
+    font-size: xx-large;
+    font-weight: bold;
+}
+#qty-descrip{
+    text-shadow: none;
+    font-size: small;
 }
 
 .sizes:has(input[id="25"]:checked) ~ .sizes-popup .pop-25 {
