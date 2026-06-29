@@ -598,6 +598,10 @@ input[type="radio"]{
     }
 }
 
+.sizes-popup:hover{
+    scale: 1.30px;
+}
+
 /* HOW TO ORDER */
 .order-layout {
     flex-direction: column;
