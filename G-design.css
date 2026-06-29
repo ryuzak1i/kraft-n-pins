@@ -480,18 +480,38 @@ input[type="radio"]{
     border-radius: 20px;
     padding: 20px;
     margin-top: 20px;
-    width: 600px;
+    width: 800px;
     max-width: 800px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1), 4px 6px 0px #ef6a80a8;
     text-align: center;
-    color: #5e2e3a;
+    color: #a55166;
     animation: fadeIn 0.3s ease-in-out;
+    
 }
 
 .pop-box h3 {
     color: #e988a0;
     margin-bottom: 8px;
     font-weight: 800;
+}
+.qty-box {
+    display: flex;             
+    justify-content: center;   
+    gap: 15px;                 
+    width: 100%;              
+    margin-top: 15px;        
+}
+
+.pop-25-solo, 
+.pop-25-trio, 
+.pop-25-squad {
+    flex: 1;                   /* Makes all three boxes exactly the same width */
+    max-width: 280px;         
+    background-color: #fff9c0ac;
+    border-radius: 12px;       
+    padding: 12px;           
+    text-align: center;      
+    box-shadow: 4px 5px 0px #ef6a80a8;
 }
 
 .sizes:has(input[id="25"]:checked) ~ .sizes-popup .pop-25 {
