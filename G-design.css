@@ -833,18 +833,23 @@ input[type="radio"]{
 
 .paragraph-container p {
     font-size: 0.95rem;
-    color: #5e2e3adc;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    color: #a55166;
+    line-height: 2.0;
     padding: 24px;
     text-align: justify;
+
+    background-color: #ffffff;
+    border: 4px dashed #e988a0;
+    border-radius: 20px;
+    box-shadow: 4px px 0px #e988a0; 
 
 }
 
 #end-statement{
+    margin-top: 24px;
     font-size: 1.2rem;
     text-align: center;
-    color: #a55166;
+    color: #fff6b0;
     
 }
 .paragraph-container p:last-child {
