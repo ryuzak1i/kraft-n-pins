@@ -289,8 +289,12 @@ header {
 }
 
 @keyframes mySwirl { 
-    0% { transform: rotate(0deg); } 
-    100% { transform: rotate(360deg); } 
+    0% { 
+        transform: rotate(0deg); 
+    } 
+    100% { 
+        transform: rotate(360deg); 
+    } 
 }
 
 @keyframes mySwirl2 { 
@@ -327,9 +331,15 @@ header {
 }
 
 @keyframes myColor {
-    0%, 100% { color: #fff6b0; }
-    20% { color: #fdf6c6; }
-    40% { color: #ffffff; }
+    0%, 100% { 
+        color: #fff6b0; 
+    }
+    20% { 
+        color: #fdf6c6; 
+    }
+    40% { 
+        color: #ffffff; 
+    }
 }
 
 .description {
@@ -555,7 +565,7 @@ input[type="radio"]{
     border: 6px solid transparent; /* Placeholder to prevent layout jumping */
     transition: 
         transform 1.4s cubic-bezier(0.25, 1, 0.5, 1), 
-        border-color 2.0s cubic-bezier(0.25, 1, 0.5, 1), 
+        border-color 1.5s cubic-bezier(0.25, 1, 0.5, 1), 
         box-shadow 1.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -586,7 +596,20 @@ input[type="radio"]{
     background-color: #fdf6c6;
 
     margin-top: 6px;
-    
+
+    animation: glow 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+@keyframes glow {
+    75%, 100% { 
+        opacity: 1; 
+        filter: drop-shadow(0 0 3px #fffbd0); 
+    }
+    100% { 
+        opacity: 1; 
+        filter: drop-shadow(0 0 0px transparent); 
+    }
 }
 
 .sizes:has(input[id="25"]:checked) ~ .sizes-popup .pop-25 {
