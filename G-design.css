@@ -839,6 +839,13 @@ input[type="radio"]{
     margin-bottom: 0;
 }
 
+details {
+    margin: 16px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: -8px 4px 0px #e988a0; /* Shadow now wraps the ENTIRE open card */
+    overflow: hidden; /* Keeps the internal content from spilling out of the rounded corners */
+}
 details summary {
     display: flex;
     justify-content: space-between; 
@@ -846,12 +853,11 @@ details summary {
     cursor: pointer;
     list-style: none; 
     padding: 15px 20px;
-    margin: 16px;
-    
-    color:#a55166;
-    border-radius: 20px;
+    color: #a55166;
     background-color: #ffffff;
-    box-shadow: -8px 4px 0px #e988a0;
+    
+    /* Remove margins and shadows from here so it blends into the container */
+    margin: 0;
 }
 
 details summary::after {
@@ -860,6 +866,38 @@ details summary::after {
     color: #e988a0; /* Matches your cute pink theme! */
     transition: transform 0.3s ease; /* Makes the arrow twist smoothly */
 }
+
+details[open] summary::after {
+    transform: rotate(180deg); /* Swivel the arrow down when opened */
+}
+
+.faq-item{
+    padding: 15px 20px;
+    color: #5e2e3a; 
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: justify;
+    
+    border-top: 2px dashed #fcd2dc; 
+    background-color: #ffffff; 
+    
+    margin: 0;
+    border-radius: 0;
+}
+
+#note{
+    padding: 15px 20px;
+    color: #dc2b57; 
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: justify;
+    
+    margin: 0;
+    border-radius: 0;
+}
+
 
 .faq-footer {
     font-size: 0.75rem;
