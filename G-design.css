@@ -814,8 +814,12 @@ input[type="radio"]{
 }
 
 @keyframes myColor {
-    0%, 100% { color: #fff6b0; }
-    20% { color: #fdf6c6; }
+    0%, 100% {
+        color: #fff6b0;
+    }
+    20% { 
+        color: #fdf6c6; 
+    }
     40% { color: #ffffff; }
 }
 
@@ -843,8 +847,8 @@ details {
     margin: 16px;
     background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: -8px 4px 0px #e988a0; /* Shadow now wraps the ENTIRE open card */
-    overflow: hidden; /* Keeps the internal content from spilling out of the rounded corners */
+    box-shadow: -8px 4px 0px #e988a0; 
+    overflow: hidden; 
 }
 details summary {
     display: flex;
@@ -856,8 +860,10 @@ details summary {
     color: #a55166;
     background-color: #ffffff;
     
-    /* Remove margins and shadows from here so it blends into the container */
     margin: 0;
+}
+details summary:hover{
+    color: #e988a0;
 }
 
 details summary::after {
@@ -884,6 +890,7 @@ details[open] summary::after {
     
     margin: 0;
     border-radius: 0;
+    
 }
 
 #note{
