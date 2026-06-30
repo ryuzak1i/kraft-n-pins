@@ -780,6 +780,10 @@ input[type="radio"]{
     line-height: 1.4;
 }
 
+#socials{
+    color: #e988a0;
+}
+
 /* ABOUT & FAQ LAYOUTS */
 .text-layout {
     flex-direction: column;
@@ -908,7 +912,7 @@ details[open] .faq-content {
         opacity: 0;
     }
     100% {
-        max-height: 300px; /* Set this slightly larger than your longest FAQ content */
+        max-height: 300px; 
         opacity: 1;
     }
 }
