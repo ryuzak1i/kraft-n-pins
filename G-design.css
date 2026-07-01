@@ -743,6 +743,7 @@ input[type="radio"]{
 
 .boxes-row {
     display: flex;
+    flex-wrap: row;
     justify-content: center; 
     align-items: stretch;
     width: 100%; 
@@ -841,7 +842,6 @@ input[type="radio"]{
     background-color: #ffffffe2;
     border: 4px dashed #e988a0;
     border-radius: 20px;
-    box-shadow: 4px 0px 0px #e988a0; 
 
 }
 
@@ -955,7 +955,7 @@ footer {
 
     display: flex;
     justify-content: space-between; 
-    align-items: flex-start; /* FIX 1: Aligns all columns perfectly at the top */
+    align-items: flex-start;
 }
 
 .brandname-details, .quick-links, .social-details {
@@ -1173,6 +1173,95 @@ footer {
     }
     .sparkle-big4 svg {
         width: 7vw;
+    }
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS (Stacking Engine)
+   ========================================== */
+@media (max-width: 768px) {
+
+    .section-container {
+        min-height: auto;          /* Releases the rigid 100vh constraint */
+        padding-top: 100px;        /* Keeps content safe from the sticky navigation bar */
+        padding-bottom: 80px;      /* Generates beautiful spacing before the next section header */
+    }
+
+    /* Target specific vertical flow adjustments if needed */
+    .order-layout {
+        gap: 24px;                 /* Balances the space between the header badge and the step boxes */
+        padding-top: 60px;         /* Prevents excessive stacking height */
+    }
+
+    .sizes-popup {
+        width: 100%;
+    }
+
+    .pop-box {
+        width: 100% !important; 
+        max-width: 100%;
+        height: auto;           /* Let it expand vertically dynamically */
+        padding: 20px 15px;     
+        margin-left: auto;      
+        margin-right: auto;  
+    }
+
+    .qty-box {
+        flex-direction: column;
+        height: auto;
+        gap: 12px;
+    }
+
+    .pop-25-solo, .pop-25-trio, .pop-25-squad,
+    .pop-32-solo, .pop-32-duo, .pop-32-squad,
+    .pop-58-solo, .pop-58-duo, .pop-58-squad {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .boxes-row {
+        flex-direction: column;
+        gap: 20px;
+        width: 90%;          
+        max-width: 100%;    
+        margin: 0 auto;
+    }
+    
+    .circle-row {
+        display: none; 
+    }
+    
+    /*FOOTER*/
+    .footer-content {
+        flex-direction: column;    
+        align-items: center;       
+        text-align: center;
+        padding: 30px 20px;        
+        margin: 0;               
+        gap: 40px;              
+    }
+
+    .brandname-details, .quick-links, .social-details {
+        width: 100%;             
+    }
+
+    .quick-links ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;                
+    }
+
+    .social-details ul {
+        margin: 0 auto;            /* Centers the contact links wrapper block */
+    }
+
+    .contacts-item {
+        box-shadow: -4px 3px 0px #e988a0; /* Slightly scales down thick shadow for mobile symmetry */
+    }
+
+    .footer-end {
+        margin: 20px;              /* Reduces vast desktop margins */
+        padding-top: 20px;
     }
 }
 ::selection {
