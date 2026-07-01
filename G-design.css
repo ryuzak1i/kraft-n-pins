@@ -948,21 +948,42 @@ footer{
 }
 
 .footer-content{
-    margin: 24px;
+    margin-left: 40px;
+    margin-right: 40px;
     padding: 60px;
 
-    font-weight: 400;
+    font-weight: 500;
+
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.footer-content a{
+    text-decoration: none;
+    color: white;
+
+    font-weight: 500;
 }
 
 .footer-content li{
-    list-style: none;
+    list-style-type: none;
 }
 
 #brandname-footer{
     font-size: 1.8rem;
     font-weight: 900;
-    color: antiquewhite;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);;
+    color: #fdf6c6;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    
+}
+
+#name-footer{
+    color: #fdf6c6;
+
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);;
 }
 
 .footer-end{
@@ -973,8 +994,10 @@ footer{
     color:#a55166;
     border-top: 1px solid #ffffff;
 
-    margin:40px;
-    padding: 16px;
+    margin:16px;
+    padding-top: 16px;
+
+    
 }
 
 
