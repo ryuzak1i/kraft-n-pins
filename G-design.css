@@ -838,7 +838,7 @@ input[type="radio"]{
     padding: 24px;
     text-align: justify;
 
-    background-color: #ffffff;
+    background-color: #ffffffe2;
     border: 4px dashed #e988a0;
     border-radius: 20px;
     box-shadow: 4px px 0px #e988a0; 
@@ -849,7 +849,7 @@ input[type="radio"]{
     margin-top: 24px;
     font-size: 1.2rem;
     text-align: center;
-    color: #fff6b0;
+    color: #a55166;
     
 }
 .paragraph-container p:last-child {
@@ -940,6 +940,41 @@ details[open] .faq-content {
     color: #5e2e3a;
     font-weight: 600;
     line-height: 1.4;
+}
+
+footer{
+    color: #ffffff;
+    border-top: 2px solid #ffffff;
+}
+
+.footer-content{
+    margin: 24px;
+    padding: 60px;
+
+    font-weight: 400;
+}
+
+.footer-content li{
+    list-style: none;
+}
+
+#brandname-footer{
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: antiquewhite;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);;
+}
+
+.footer-end{
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight: 400;
+
+    color:#a55166;
+    border-top: 1px solid #ffffff;
+
+    margin:40px;
+    padding: 16px;
 }
 
 
