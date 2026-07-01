@@ -1055,6 +1055,11 @@ footer {
 
 #emoticon{
     font-size: 2rem;
+    transition: transform 0.2s ease-out;
+}
+
+#emoticon:hover{
+    transform: rotate(2deg) ;
 }
 
 .footer-end {
