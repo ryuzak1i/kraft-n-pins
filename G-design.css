@@ -1034,6 +1034,46 @@ input[type="radio"]{
     user-select: none; 
 }
 
+.pinkpin-order{
+    position: absolute; 
+    top: 33%; 
+    left: 73%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.pinkpin-order img{
+    display: block; 
+    width: 5vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 1; 
+    transform: rotate(-5deg);
+    filter:drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+
+    animation: cuteFloat 5s linear infinite; 
+}
+
+.yellowpin-order{
+    position: absolute; 
+    top: 30%; 
+    right: 73%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.yellowpin-order img{
+    display: block; 
+    width:5vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 1; 
+    transform: rotate(-5deg);
+    filter:drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+
+    animation: cuteFloat2 5s linear infinite; 
+}
+
 /* ABOUT & FAQ LAYOUTS */
 .text-layout {
     flex-direction: column;
@@ -1318,6 +1358,100 @@ details[open] .faq-content {
     
     margin: 0;
     border-radius: 0;
+}
+
+.star-faq{
+    position: absolute; 
+    bottom: 56%; 
+    right: 135%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.star-faq img { 
+    display: block; 
+    width: 60vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.4; 
+    transform: rotate(25deg);
+}
+
+.star2-faq{
+    position: absolute; 
+    top: 56%; 
+    left: 135%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.star2-faq img { 
+    display: block; 
+    width: 60vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.4; 
+    transform: rotate(65deg);
+}
+
+.star3-faq{
+    position: absolute; 
+    top: 56%; 
+    right: 85%; 
+    pointer-events: none; 
+    z-index: -1; 
+}
+
+.star3-faq img { 
+    display: block; 
+    width: 20vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.2; 
+    transform: rotate(-5deg);
+}
+
+.star4-faq{
+    position: absolute; 
+    bottom: 50%; 
+    left: 80%; 
+    pointer-events: none; 
+    z-index: -1; 
+}
+
+.star4-faq img { 
+    display: block; 
+    width: 20vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.4; 
+    transform: rotate(25deg);
+}
+
+.questionmark-faq{
+    position: absolute; 
+    top: 28%; 
+    left: 140%; 
+    pointer-events: none; 
+    z-index: 1; 
+    opacity: 0.3;
+
+    color: #ffffff;
+    font-size: 8.9rem;
+    width: 24px;          
+}
+
+.questionmark2-faq{
+    position: absolute; 
+    bottom: 18%; 
+    right: 145%; 
+    pointer-events: none; 
+    z-index: 1; 
+    opacity: 0.3;
+
+    color: #ffffff;
+    font-size: 8.9rem;
+    width: 24px;          
 }
 
 /*FOOTER*/
