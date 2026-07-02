@@ -654,7 +654,7 @@ input[type="radio"]{
 
 /* BACKGROUND ACCENTS (SHOP PINS) */
 
-.bg-star{
+.star-shop{
     position: absolute; 
     bottom: 15%; 
     right: 130%; 
@@ -662,7 +662,7 @@ input[type="radio"]{
     z-index: 1; 
 }
 
-.bg-star img { 
+.star-shop img { 
     display: block; 
     width: 15vw; 
     max-width: 400px;
@@ -673,7 +673,7 @@ input[type="radio"]{
     animation: cuteFloat 4s ease-in-out infinite;
 }
 
-.bg-star2{
+.star2-shop{
     position: absolute; 
     top: 2%; 
     left: 125%; 
@@ -681,7 +681,7 @@ input[type="radio"]{
     z-index: 1; 
 }
 
-.bg-star2 img { 
+.star2-shop img { 
     display: block; 
     width: 13vw; 
     max-width: 400px;
@@ -697,7 +697,7 @@ input[type="radio"]{
         transform: rotate(25deg) translateY(0px);
     }
     50% {
-        transform: rotate(25deg) translateY(-20px); 
+        transform: rotate(25deg) translateY(-30px); 
     }
     100% {
         transform: rotate(25deg) translateY(0px);
@@ -709,12 +709,13 @@ input[type="radio"]{
         transform: rotate(-5deg) translateY(0px);
     }
     50% {
-        transform: rotate(-5deg) translateY(25px); 
+        transform: rotate(-5deg) translateY(35px); 
     }
     100% {
         transform: rotate(-5deg) translateY(0px);
     }
 }
+
 
 /* HOW TO ORDER */
 .order-layout {
@@ -844,6 +845,47 @@ input[type="radio"]{
 
 #socials{
     color: #e988a0;
+}
+
+/*BACKRGOUND ACCENTS (HOW TO ORDER)*/
+
+.swirl-order{
+    position: absolute; 
+    top: 4%; 
+    right: 83%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.swirl-order img{
+    display: block; 
+    width: 100vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.5; 
+    transform: rotate(-5deg);
+
+    animation: mySwirl2 5s linear infinite; 
+}
+
+.swirl2-order{
+    position: absolute; 
+    top: 63%; 
+    left: 83%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.swirl2-order img{
+    display: block; 
+    width: 100vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.5; 
+    transform: rotate(-5deg);
+
+    animation: mySwirl 5s linear infinite; 
+
 }
 
 /* ABOUT & FAQ LAYOUTS */
