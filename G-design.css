@@ -1182,6 +1182,42 @@ input[type="radio"]{
     animation: picFloat2 6s ease-in-out infinite;
 }
 
+.arrow-about{
+    position: absolute; 
+    top: 20%; 
+    right: 155%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.arrow-about img { 
+    display: block; 
+    width: 15vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 1 ; 
+    transform: rotate(-25deg);
+
+}
+
+.arrow2-about{
+    position: absolute; 
+    top: 28%; 
+    left: 155%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.arrow2-about img { 
+    display: block; 
+    width: 15vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 1 ; 
+    transform: scalex(-1);
+
+}
+
 @keyframes picFloat {
     0% {
         transform: rotate(-5deg) translateY(0px);
