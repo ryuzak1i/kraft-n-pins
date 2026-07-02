@@ -656,8 +656,8 @@ input[type="radio"]{
 
 .star-shop{
     position: absolute; 
-    bottom: 15%; 
-    right: 130%; 
+    top: 65%; 
+    right: 125%; 
     pointer-events: none; 
     z-index: 1; 
 }
@@ -692,6 +692,42 @@ input[type="radio"]{
     animation: cuteFloat2 4s ease-in-out infinite;
 }
 
+.star3-shop{
+    position: absolute; 
+    bottom: 50%; 
+    right: 125%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.star3-shop img { 
+    display: block; 
+    width: 30vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.3; 
+    transform: rotate(-5deg);
+
+}
+
+.star4-shop{
+    position: absolute; 
+    top: 79%; 
+    left: 120%; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.star4-shop img { 
+    display: block; 
+    width: 60vw; 
+    max-width: 400px;
+    height: auto; 
+    opacity: 0.3; 
+    transform: rotate(25deg);
+
+}
+
 @keyframes cuteFloat {
     0% {
         transform: rotate(25deg) translateY(0px);
@@ -716,6 +752,81 @@ input[type="radio"]{
     }
 }
 
+
+
+.sparkle-shop{
+    position: absolute; 
+    top: 30%; 
+    right: 125%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 1.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle-shop svg { 
+    width: 2vw;
+    max-width: 160px; 
+    height: auto; 
+    user-select: none; 
+}
+
+.sparkle2-shop{
+    position: absolute; 
+    top: 3%; 
+    left: 145%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle2-shop svg { 
+    width: 2vw;
+    max-width: 160px; 
+    height: auto; 
+    user-select: none; 
+}
+
+.sparkle3-shop{
+    position: absolute; 
+    top: 97%; 
+    right: 115%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle3-shop svg { 
+    width: 5vw;
+    max-width: 160px; 
+    height: auto; 
+    user-select: none; 
+}
+
+.sparkle4-shop{
+    position: absolute; 
+    top: 47%; 
+    left: 119%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 1.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle4-shop svg { 
+    width: 5vw;
+    max-width: 160px; 
+    height: auto; 
+    user-select: none; 
+
+    transform: rotate(5deg);
+}
 
 /* HOW TO ORDER */
 .order-layout {
