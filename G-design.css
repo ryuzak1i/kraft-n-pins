@@ -885,7 +885,42 @@ input[type="radio"]{
     transform: rotate(-5deg);
 
     animation: mySwirl 5s linear infinite; 
+}
 
+.sparkle-order{
+    position: absolute; 
+    top: 32%; 
+    right: 85%; 
+    z-index: 3; 
+    color: #fffbd0; 
+
+    animation: shine 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle-order svg { 
+    width: 9vw;
+    max-width: 160px; 
+    height: auto; 
+    user-select: none; 
+}
+
+.sparkle2-order{
+    position: absolute; 
+    top: 60%; 
+    left: 85%; 
+    z-index: 3; 
+    color: #fffbd0; 
+    
+    animation: shine 2.5s ease-in-out infinite; 
+    animation-delay: 0.75s; 
+}
+
+.sparkle2-order svg { 
+    width: 9vw;
+    max-width: 160px; 
+    height: auto; 
+    user-select: none; 
 }
 
 /* ABOUT & FAQ LAYOUTS */
