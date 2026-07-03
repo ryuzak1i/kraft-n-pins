@@ -1309,8 +1309,8 @@ details summary:hover{
 details summary::after {
     content: "❤";
     font-size: 1rem;
-    color: #e988a0; /* Matches your cute pink theme! */
-    transition: transform 0.3s ease; /* Makes the arrow twist smoothly */
+    color: #e988a0; 
+    transition: transform 0.3s ease; 
 }
 
 details[open] summary::after {
