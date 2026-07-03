@@ -1,6 +1,6 @@
 # ⋆˚꩜ kraft n' pins — Official Website
 
-Welcome to the frontend repository for **kraft n' pins**! This is a vibrant, interactive, and fully responsive single-page website built using **HTML5 and CSS3**. The design perfectly captures the cute, pastel, and student-friendly aesthetic of our local button-pin business based in Imus, Cavite and Manila.
+Welcome to the frontend repository for **kraft n' pins**! This is a vibrant, interactive, and fully responsive single-page website built using **HTML5 and CSS3**. The design perfectly captures the cute, pastel, and student-friendly aesthetic of our local button-pin business based in Imus, Cavite and Manila ! ♡
 
 Live Demo: https://ryuzak1i.github.io/kraft-n-pins/
 
@@ -19,20 +19,11 @@ The website utilizes a seamless single-page architecture with smooth scrolling n
 ## Design & UX Highlights（＾ω＾）
 
 *   **Responsive Layout:** Built mobile-first using modern **CSS Flexbox and Grid** to ensure it looks flawless on smartphones, tablets, and desktops.
-*   **Cohesive Branding:** Features a soft, pastel color palette (pinks, creams, and warm accents) tailored to our student community.
+*   **Cohesive Branding:** Features a soft, pastel color palette (pinks, creams, and yellow accents) tailored to our student community.
 *   **Micro-Interactions:** Includes playful hover states on buttons, smooth navigation transitions (`scroll-behavior: smooth;`), and dynamic scaling cards for the shop bundles.
 
----
 
-## 🛠️ Tech Stack
+## Tech Stack (꒪▿꒪)
 
 *   **HTML5** - Structured, semantic markup.
 *   **CSS3** - Custom properties (`:root`), Flexbox, Grid layout, and Media Queries for responsiveness.
-
----
-
-## 🚀 How to Run Locally
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/your-username/kraft-n-pins.git](https://github.com/your-username/kraft-n-pins.git)
