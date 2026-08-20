@@ -2,7 +2,7 @@
 
 Welcome to the frontend repository for **kraft n' pins**! This is a vibrant, interactive, and fully responsive single-page website built using **HTML5 and CSS3**. The design perfectly captures the cute, pastel, and student-friendly aesthetic of our local button-pin business based in Imus, Cavite and Manila ! ♡
 
-Live Demo: https://ryuzak1i.github.io/kraft-n-pins/
+Live Demo: https://ryuzak1i.github.io/kraft-n-pins/ (NOT AVAILABLE AT PHONE LAYOUT YET)
 
 ## Features & Navigation (˶ᵔ ᵕ ᵔ˶)
 
