@@ -11,17 +11,22 @@
     <link rel="icon" type="png" href="images/flower.png">
 </head>
 <body>
-
     <header>
         <nav class="navbar">
-            <ul>
-                <li>
-                    <a href="#home" id="brandname">
-                        <b>kraft n' pins</b>
-                        <img id="flower-logo" src="images/flower.png" alt="Flower Logo">
-                    </a>
-                </li>
+            <!-- 1. Top Bar: Logo & Hamburger Icon -->
+            <div class="nav-top">
+                <a href="#home" id="brandname">
+                    <b>kraft n' pins</b>
+                    <img id="flower-logo" src="images/flower.png" alt="Flower Logo">
+                </a>
+                
+                <div class="hamburger" id="hamburger-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
 
+            <!-- 2. Collapsible Links -->
+            <ul id="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#shop">Shop Pins</a></li>
                 <li><a href="#how-to-order">How to Order</a></li>
@@ -495,6 +500,23 @@
         </div>
     </footer>
     
+<script>
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+        // Toggles the dropdown animation on and off
+        navLinks.classList.toggle('show-menu');
+    });
+
+    // Optional: Close the menu automatically when a link is clicked
+    const links = document.querySelectorAll('#nav-links a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('show-menu');
+        });
+    });
+</script>
 
 </body>
 </html>

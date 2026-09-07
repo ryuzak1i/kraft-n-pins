@@ -9,7 +9,7 @@ html {
     scroll-behavior: smooth;
     font-size: 16px; 
     
-    /* 1. FIX: Keeps the layout perfectly locked horizontally */
+    /* Keeps the layout perfectly locked horizontally */
     overflow-x: hidden; 
 }
 
@@ -24,7 +24,6 @@ body {
 }
 
 /* NAVBAR */
-
 header {
     position: fixed;
     top: 0;
@@ -33,21 +32,42 @@ header {
     z-index: 1000;
 }
 
-.navbar ul {
-    list-style-type: none;
+/* --- BASE NAVBAR STYLES (Desktop) --- */
+.navbar {
     background-color: #f19fb3;
     box-shadow: 0px 5px 5px #f19fb3, 0px 10px 20px #fabbcb;
-    margin: 0;
     padding: 0 20px; 
     display: flex; 
     align-items: center;
+    justify-content: space-between;
 }
 
-.navbar ul li:first-child {
-    font-size: 25px;
-    margin-right: auto;
-    font-weight: 200;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+.nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; 
+    display: flex; 
+    align-items: center;
+    transition: max-height 0.3s ease-in-out;
+}
+
+/* Hide Hamburger on PC */
+.hamburger {
+    display: none; 
+    font-size: 28px;
+    color: antiquewhite;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.hamburger:hover {
+    transform: scale(1.1);
 }
 
 #brandname {
@@ -61,7 +81,6 @@ header {
 #brandname:hover {
     background-color: transparent; 
     transform: scale(1.08);
-    
 }
 
 #flower-logo {
@@ -1773,6 +1792,235 @@ footer {
         margin: 20px;              /* Reduces vast desktop margins */
         padding-top: 20px;
     }
+
+    /* ==========================================
+    TABLET RESPONSIVENESS (Max 992px)
+   ========================================== */
+@media (max-width: 992px) {
+    /* Navbar Wrapping */
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 5px;
+        gap: 5px;
+    }
+
+    .navbar ul li:first-child {
+        width: 100%;
+        margin-right: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    #brandname {
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .navbar a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* Push sections down to accommodate the taller, wrapped navbar */
+    .section-container {
+        padding-top: 160px;
+    }
+
+    .shop {
+        width: 95%;
+    }
+}
+
+/* ==========================================
+    MOBILE RESPONSIVENESS (Max 768px)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Typography Scaling */
+    html {
+        font-size: 13px; 
+    }
+
+    .heading {
+        font-size: 2.8rem;
+    }
+
+    .heading-secondary,
+    .how-to-order-title {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        padding: 0 15px;
+    }
+
+    /* Button Stacking */
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 14px 20px;
+    }
+
+    /* Shop Section - Size Toggles Stacking */
+    .sizes {
+        flex-direction: column;
+        border-radius: 20px;
+        gap: 8px;
+    }
+
+    .radio-25, .radio-32, .radio-58 {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    /* Text Boxes Scaling */
+    .center-text-block {
+        padding: 25px 15px;
+        border-radius: 20px;
+    }
+
+    .paragraph-container p {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+
+    /* Adjust Background Accents to Prevent Overlap on Small Screens */
+    .bg-deco1, .bg-deco2, .swirl-deco1, .swirl-deco2, 
+    .star-shop, .star2-shop, .star3-shop, .star4-shop, 
+    .swirl-order, .swirl2-order, .pinkpin-order, .yellowpin-order,
+    .polaroid-about, .backpin-about, .backpin2-about, .est-about, 
+    .arrow-about, .arrow2-about {
+        opacity: 0.15; /* Toned down so text remains readable */
+    }
+
+    /* Hide excessively large background decos on mobile */
+    .questionmark-faq, .questionmark2-faq {
+        display: none; 
+    }
+
+    /* Accordion Adjustments */
+    details summary {
+        font-size: 0.9rem;
+        padding: 12px 15px;
+    }
+    
+    .faq-item {
+        padding: 12px 15px;
+    }
+}
+
+/* ==========================================
+    SMALL MOBILE RESPONSIVENESS (Max 480px)
+   ========================================== */
+@media (max-width: 480px) {
+    /* Tighten Navbar for tiny screens */
+    .navbar a {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+
+    #brandname {
+        font-size: 1.5rem;
+    }
+
+    #ordernow {
+        padding: 6px 12px;
+    }
+
+    /* Additional offset for 3-line wrapped navbar */
+    .section-container {
+        padding-top: 180px; 
+    }
+}
+
+/* --- BASE NAVBAR STYLES (Desktop) --- */
+.navbar {
+    background-color: #f19fb3;
+    box-shadow: 0px 5px 5px #f19fb3, 0px 10px 20px #fabbcb;
+    padding: 0 20px; 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; 
+    display: flex; 
+    align-items: center;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.hamburger {
+    display: none; /* Hidden on desktop */
+    font-size: 28px;
+    color: antiquewhite;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.hamburger:hover {
+    transform: scale(1.1);
+}
+
+/* ==========================================
+    HAMBURGER MENU RESPONSIVENESS (< 992px)
+   ========================================== */
+@media (max-width: 992px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+    }
+
+    .nav-top {
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger icon on small screens */
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;       /* Hides menu completely by default */
+        overflow: hidden;    /* Prevents links from spilling out */
+        padding: 0;
+    }
+
+    /* This class is added by JavaScript when clicked */
+    .navbar ul.show-menu {
+        max-height: 500px;   /* Expands menu */
+        padding-bottom: 20px;
+    }
+
+    .navbar ul li {
+        width: 100%;
+    }
+
+    .navbar a {
+        padding: 12px 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
 }
 ::selection {
   background-color: #e988a0b1; /* The highlight background color */
