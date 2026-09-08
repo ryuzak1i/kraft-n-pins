@@ -14,13 +14,24 @@ html {
 }
 
 body {
-    background-image: linear-gradient(#fff9c0, #ffa3b3);
-    background-attachment: fixed;
     font-family: "Poppins", sans-serif;
     
-    /* 2. FIX: Safety fallback to kill the jumping horizontal scrollbar completely */
     overflow-x: hidden; 
     width: 100%;
+    
+}
+
+/* Add this new block right below the body rule */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(#fff9c0, #ffa3b3);
+    z-index: -10; /* Keeps the background firmly behind all your content */
+    pointer-events: none; /* Ensures the background doesn't block any clicks */
 }
 
 /* NAVBAR */
@@ -1836,23 +1847,30 @@ footer {
     MOBILE RESPONSIVENESS (Max 768px)
    ========================================== */
 @media (max-width: 768px) {
-    /* Typography Scaling */
-    html {
+     html {
         font-size: 13px; 
     }
 
     .heading {
-        font-size: 2.8rem;
+        font-size: 3.8rem; 
+        margin-bottom: 8px;
     }
 
     .heading-secondary,
     .how-to-order-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .description {
-        font-size: 1.1rem;
-        padding: 0 15px;
+        font-size: 0.85rem; 
+        padding: 0;
+        margin-top: 2rem;
+    }
+    
+    .est {
+        font-size: 0.75rem;
+        padding: 3px 12px;
+        margin-bottom: 2rem;
     }
 
     /* Button Stacking */
@@ -1931,36 +1949,6 @@ footer {
         gap: 20px;
         padding-bottom: 30px;
     }
-
-    /* 2. Smaller Hero Content */
-    html {
-        font-size: 13px; 
-    }
-
-    .heading {
-        font-size: 2.5rem; 
-        margin-bottom: 8px;
-    }
-
-    .heading-secondary,
-    .how-to-order-title {
-        font-size: 2.2rem;
-    }
-
-    .description {
-        font-size: 0.85rem; 
-        padding: 0;
-        margin-top: 2rem;
-    }
-    
-    .est {
-        font-size: 0.75rem;
-        padding: 3px 12px;
-        margin-bottom: 2rem;
-    }
-
-    /* ... Keep your other existing 768px button and shop styling below ... */
-}
 }
 
 /* ==========================================
@@ -1984,6 +1972,17 @@ footer {
     /* Additional offset for 3-line wrapped navbar */
     .section-container {
         padding-top: 180px; 
+        padding-left: 16px;  /* Keeps side padding proportional */
+        padding-right: 16px;
+    }
+    
+    /* Shrink hero content for tiny phones */
+    .heading {
+        font-size: 1.8rem;
+    }
+
+    .description {
+        font-size: 0.85rem;
     }
 }
 
