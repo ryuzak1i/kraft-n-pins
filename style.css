@@ -1804,36 +1804,49 @@ footer {
         padding-top: 20px;
     }
 
-    /* ==========================================
-    TABLET RESPONSIVENESS (Max 992px)
+ /* ==========================================
+    TABLET & HAMBURGER RESPONSIVENESS (Max 992px)
    ========================================== */
 @media (max-width: 992px) {
-    /* Navbar Wrapping */
-    .navbar ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 5px;
-        gap: 5px;
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
     }
 
-    .navbar ul li:first-child {
+    .nav-top {
         width: 100%;
-        margin-right: 0;
-        display: flex;
-        justify-content: center;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
 
-    #brandname {
-        padding: 10px;
-        justify-content: center;
+    .hamburger {
+        display: block; 
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;       
+        overflow: hidden;    
+        padding: 0;
+    }
+
+    .navbar ul.show-menu {
+        max-height: 500px;   
+        padding-bottom: 20px;
+    }
+
+    .navbar ul li {
+        width: 100%;
     }
 
     .navbar a {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+        padding: 12px 20px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
-    /* Push sections down to accommodate the taller, wrapped navbar */
     .section-container {
         padding-top: 160px;
     }
@@ -1852,7 +1865,7 @@ footer {
     }
 
     .heading {
-        font-size: 3.8rem; 
+        font-size: 2.2rem; /* Reduced so it fits nicely on phones */
         margin-bottom: 8px;
     }
 
@@ -1862,7 +1875,7 @@ footer {
     }
 
     .description {
-        font-size: 0.85rem; 
+        font-size: 0.95rem; 
         padding: 0;
         margin-top: 2rem;
     }
@@ -1909,16 +1922,15 @@ footer {
         font-size: 0.9rem;
     }
 
-    /* Adjust Background Accents to Prevent Overlap on Small Screens */
+    /* Adjust Background Accents */
     .bg-deco1, .bg-deco2, .swirl-deco1, .swirl-deco2, 
     .star-shop, .star2-shop, .star3-shop, .star4-shop, 
     .swirl-order, .swirl2-order, .pinkpin-order, .yellowpin-order,
     .polaroid-about, .backpin-about, .backpin2-about, .est-about, 
     .arrow-about, .arrow2-about {
-        opacity: 0.15; /* Toned down so text remains readable */
+        opacity: 0.15; 
     }
 
-    /* Hide excessively large background decos on mobile */
     .questionmark-faq, .questionmark2-faq {
         display: none; 
     }
@@ -1933,11 +1945,11 @@ footer {
         padding: 12px 15px;
     }
    
-    /* 1. Add side padding & reduce vertical section gaps */
+    /* Added side padding & reduced vertical section gaps */
     .section-container {
         padding-left: 24px;
         padding-right: 24px;
-        padding-bottom: 40px; /* Shrinks the gap between main sections */
+        padding-bottom: 40px; 
     }
 
     .text-layout {
@@ -1955,7 +1967,6 @@ footer {
     SMALL MOBILE RESPONSIVENESS (Max 480px)
    ========================================== */
 @media (max-width: 480px) {
-    /* Tighten Navbar for tiny screens */
     .navbar a {
         padding: 6px 8px;
         font-size: 0.8rem;
@@ -1969,14 +1980,12 @@ footer {
         padding: 6px 12px;
     }
 
-    /* Additional offset for 3-line wrapped navbar */
     .section-container {
         padding-top: 180px; 
-        padding-left: 16px;  /* Keeps side padding proportional */
+        padding-left: 16px;  
         padding-right: 16px;
     }
     
-    /* Shrink hero content for tiny phones */
     .heading {
         font-size: 1.8rem;
     }
@@ -1986,89 +1995,7 @@ footer {
     }
 }
 
-/* --- BASE NAVBAR STYLES (Desktop) --- */
-.navbar {
-    background-color: #f19fb3;
-    box-shadow: 0px 5px 5px #f19fb3, 0px 10px 20px #fabbcb;
-    padding: 0 20px; 
-    display: flex; 
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0; 
-    display: flex; 
-    align-items: center;
-    transition: max-height 0.3s ease-in-out;
-}
-
-.hamburger {
-    display: none; /* Hidden on desktop */
-    font-size: 28px;
-    color: antiquewhite;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.hamburger:hover {
-    transform: scale(1.1);
-}
-
-/* ==========================================
-    HAMBURGER MENU RESPONSIVENESS (< 992px)
-   ========================================== */
-@media (max-width: 992px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0;
-    }
-
-    .nav-top {
-        width: 100%;
-        padding: 0 20px;
-        box-sizing: border-box;
-    }
-
-    .hamburger {
-        display: block; /* Show hamburger icon on small screens */
-    }
-
-    .navbar ul {
-        flex-direction: column;
-        width: 100%;
-        max-height: 0;       /* Hides menu completely by default */
-        overflow: hidden;    /* Prevents links from spilling out */
-        padding: 0;
-    }
-
-    /* This class is added by JavaScript when clicked */
-    .navbar ul.show-menu {
-        max-height: 500px;   /* Expands menu */
-        padding-bottom: 20px;
-    }
-
-    .navbar ul li {
-        width: 100%;
-    }
-
-    .navbar a {
-        padding: 12px 20px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-}
-
 ::selection {
-  background-color: #e988a0b1; /* The highlight background color */
-  color: #ffffff;            /* The text color inside the highlight */
+  background-color: #e988a0b1; 
+  color: #ffffff;            
 }
