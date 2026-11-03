@@ -1638,34 +1638,52 @@ footer {
 }
 
 /* ==========================================
-    ORDER FORM SPLIT LAYOUT
+    ORDER FORM LAYOUT (Title Top Center)
    ========================================== */
+.order-main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding-top: 160px; /* Pushes the entire page content down from the navbar */
+    padding-bottom: 80px;
+}
+
+.order-page-header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 3rem; /* Space between the title and the columns */
+    z-index: 2;
+}
+
+.order-page-header .heading-secondary {
+    font-size: 4.5rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.order-page-header .subheading-text {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .split-layout {
     display: flex;
     align-items: flex-start;
     justify-content: center; 
     gap: 4rem; 
-    
     max-width: 100%; 
-    min-height: 100vh; /* Ensures the background always fills the screen */
-    
-    margin: 0 auto;
     width: 100%;
-    
-    /* Increased padding-top to push the entire layout into the visual center */
-    padding-top: 220px; 
-    padding-bottom: 120px;
-    
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 0 2rem; /* Removed the top/bottom padding since the wrapper handles it now */
     box-sizing: border-box;
+    z-index: 2;
 }
 
 .order-form-col {
-    flex: 0 1 800px; /* Keeps the left column at a perfect, readable width */
+    flex: 0 1 800px; 
     width: 100%;
     max-width: 800px; 
-    
     display: flex;
     flex-direction: column;
     align-items: stretch; 
@@ -1691,11 +1709,6 @@ footer {
     box-sizing: border-box;
 }
 
-/* Removes default hidden margin so the tops align perfectly */
-.order-shop-override .heading-secondary {
-    margin-top: 0; 
-}
-
 .upload-section {
     width: 100%;
     box-sizing: border-box;
@@ -1705,7 +1718,6 @@ footer {
     STICKY SIDE BASKET
    ========================================== */
 .basket-sidebar {
-    /* Sets the basket to "just the right amount" of width */
     flex: 0 1 400px; 
     width: 100%;
     min-width: 340px;
@@ -1713,7 +1725,8 @@ footer {
     
     position: sticky;
     top: 130px; 
-    margin-top: 125px; 
+    /* Removed the 125px margin-top since the title is now out of the left column */
+    margin-top: 0; 
     height: 490px; 
     
     background-color: #ffffff;
@@ -1938,6 +1951,35 @@ footer {
     font-weight: 600;
     text-align: center;
 }
+
+/* Boost CTA Contrast (Basket Button) */
+#checkout-submit-btn.checkout-full-btn {
+    background-color: #e988a0 !important;
+    color: #ffffff !important;
+    border: none;
+    box-shadow: 0px 4px 12px rgba(233, 136, 160, 0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#checkout-submit-btn.checkout-full-btn:hover {
+    background-color: #dc2b57 !important;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+    EMPHATIC CLICK ANIMATION
+   ========================================== */
+@keyframes emphaticPop {
+    0%   { transform: scale(1.05); } /* Starts from the hover scale */
+    40%  { transform: scale(0.85); background-color: #fdf6c6; border-color: #e988a0; box-shadow: inset 0px 4px 8px rgba(0,0,0,0.1); }
+    70%  { transform: scale(1.08); background-color: #f19fb3; }
+    100% { transform: scale(1.05); } /* Returns to the hover scale */
+}
+
+.add-to-basket.clicked-animation {
+    animation: emphaticPop 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 
 /* ==========================================
     RESPONSIVE SPLIT LAYOUT (MOBILE)
