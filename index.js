@@ -136,9 +136,17 @@ function bindDragAndDrop(dropZoneElement, maxAllowed, size) {
     const inputElement = dropZoneElement.querySelector(".drop-zone-input");
 
     dropZoneElement.addEventListener("click", (e) => {
-        if (!e.target.closest('.remove-thumb-btn')) {
-            inputElement.click();
+        // Prevent upload prompt if clicking the X or View buttons
+        if (e.target.closest('.remove-thumb-btn') || e.target.closest('.view-thumb-btn')) {
+            return;
         }
+        
+        // 1. UPLOAD LOCKOUT: Prevent clicking if the max limit is reached!
+        if (uploadedFilesState[size].length >= maxAllowed) {
+            return; 
+        }
+
+        inputElement.click();
     });
 
     inputElement.addEventListener("change", (e) => {
@@ -147,7 +155,10 @@ function bindDragAndDrop(dropZoneElement, maxAllowed, size) {
 
     dropZoneElement.addEventListener("dragover", (e) => {
         e.preventDefault();
-        dropZoneElement.classList.add("drop-zone-over");
+        // Only show hover effect if they still have space
+        if (uploadedFilesState[size].length < maxAllowed) {
+            dropZoneElement.classList.add("drop-zone-over");
+        }
     });
 
     ["dragleave", "dragend"].forEach(type => {
@@ -189,7 +200,7 @@ function bindDragAndDrop(dropZoneElement, maxAllowed, size) {
     }
 }
 
-// 6. Renders the Thumbnail and UI Overlays (No Blurs!)
+// 6. Renders the Thumbnail and UI Overlays
 function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
     let thumbnailElement = dropZoneElement.querySelector(".drop-zone-thumb");
     let promptElement = dropZoneElement.querySelector(".drop-zone-prompt");
@@ -216,18 +227,33 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
             uploadedFilesState[size] = []; 
             inputElement.value = ""; 
             thumbnailElement.remove(); 
+            dropZoneElement.classList.remove("is-full"); // Re-enables clicking
             if (promptElement) promptElement.style.display = 'flex'; 
         });
     }
 
-    // 2. Inline Square Grid Preview
+    // 2. View Summary Button (Expand Icon)
+    let viewBtn = thumbnailElement.querySelector(".view-thumb-btn");
+    if (!viewBtn) {
+        viewBtn = document.createElement("button");
+        viewBtn.className = "view-thumb-btn";
+        viewBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+        thumbnailElement.appendChild(viewBtn);
+
+        viewBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); 
+            openPreviewModal(uploadedFilesState[size], size);
+        });
+    }
+
+    // 3. Inline Square Grid Preview
     let gridContainer = thumbnailElement.querySelector(".thumb-grid-container");
     if (!gridContainer) {
         gridContainer = document.createElement("div");
         gridContainer.className = "thumb-grid-container";
         thumbnailElement.appendChild(gridContainer);
     }
-    gridContainer.innerHTML = ''; // Wipe and redraw grid on every new upload
+    gridContainer.innerHTML = ''; 
 
     files.forEach(file => {
         if (file.type.startsWith("image/")) {
@@ -242,11 +268,12 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
         }
     });
 
-    // 3. Dynamic "Add More" Badge and Text Label
+    // 4. Dynamic "Add More" Badge and Full State Lockout
     const fileCount = files.length;
     let addMoreBadge = thumbnailElement.querySelector(".add-more-badge");
 
     if (fileCount < maxAllowed) {
+        dropZoneElement.classList.remove("is-full");
         thumbnailElement.dataset.label = `${fileCount} of ${maxAllowed} selected`;
         
         if (!addMoreBadge) {
@@ -256,6 +283,7 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
             thumbnailElement.appendChild(addMoreBadge);
         }
     } else {
+        dropZoneElement.classList.add("is-full"); // Triggers CSS cursor lock
         if (addMoreBadge) addMoreBadge.remove();
         thumbnailElement.dataset.label = `Max ${maxAllowed} images selected`;
     }
@@ -328,4 +356,52 @@ function openPreviewModal(files, size) {
     });
 
     modal.style.display = 'flex'; // Show the modal
+}
+
+// ==========================================
+// SQUARE GRID SUMMARY PREVIEW MODAL
+// ==========================================
+function openPreviewModal(files, size) {
+    let modal = document.getElementById('image-preview-modal');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'image-preview-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content preview-modal-content">
+                <span class="close-preview-modal"><i class="fa-solid fa-xmark"></i></span>
+                <h3 id="preview-modal-title"></h3>
+                <div class="preview-grid" id="preview-grid-container"></div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.querySelector('.close-preview-modal').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+    }
+
+    document.getElementById('preview-modal-title').innerText = `${size}mm Uploaded Designs`;
+    const grid = document.getElementById('preview-grid-container');
+    grid.innerHTML = ''; 
+
+    files.forEach(file => {
+        if (file.type.startsWith("image/")) {
+            const imgWrapper = document.createElement('div');
+            imgWrapper.className = 'preview-grid-item';
+            
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                imgWrapper.style.backgroundImage = `url('${reader.result}')`;
+            };
+            grid.appendChild(imgWrapper);
+        }
+    });
+
+    modal.style.display = 'flex'; 
 }
