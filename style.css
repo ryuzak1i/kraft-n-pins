@@ -1643,24 +1643,32 @@ footer {
 .split-layout {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between; /* Pushes the left and right columns to the sides */
-    gap: 3rem;
-    max-width: 1450px; /* Widened the container */
+    justify-content: center; 
+    gap: 4rem; 
+    
+    max-width: 100%; 
+    min-height: 100vh; /* Ensures the background always fills the screen */
+    
     margin: 0 auto;
     width: 100%;
-    padding-top: 130px; 
-    padding-bottom: 80px;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    
+    /* Increased padding-top to push the entire layout into the visual center */
+    padding-top: 220px; 
+    padding-bottom: 120px;
+    
+    padding-left: 2rem;
+    padding-right: 2rem;
     box-sizing: border-box;
 }
 
 .order-form-col {
-    flex: 1;
-    max-width: 850px; /* Caps the width so it doesn't stretch infinitely on huge monitors */
+    flex: 0 1 800px; /* Keeps the left column at a perfect, readable width */
+    width: 100%;
+    max-width: 800px; 
+    
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* Forces all inner sections to stretch uniformly */
+    align-items: stretch; 
     gap: 2rem;
 }
 
@@ -1683,32 +1691,34 @@ footer {
     box-sizing: border-box;
 }
 
+/* Removes default hidden margin so the tops align perfectly */
+.order-shop-override .heading-secondary {
+    margin-top: 0; 
+}
+
 .upload-section {
     width: 100%;
     box-sizing: border-box;
-}
-
-/* Makes the quantity boxes look clickable */
-.add-to-basket {
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.add-to-basket:active {
-    transform: scale(0.95);
 }
 
 /* ==========================================
     STICKY SIDE BASKET
    ========================================== */
 .basket-sidebar {
-    flex: 0 0 340px;
-    width: 340px;
+    /* Sets the basket to "just the right amount" of width */
+    flex: 0 1 400px; 
+    width: 100%;
+    min-width: 340px;
+    max-width: 400px; 
+    
     position: sticky;
     top: 130px; 
+    margin-top: 125px; 
+    height: 490px; 
     
     background-color: #ffffff;
     border-radius: 25px;
-    padding: 25px;
+    padding: 30px; 
     
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1), 4px 6px 0px #ef6a80a8;
     border: 2px dashed #f19fb3;
@@ -1728,8 +1738,9 @@ footer {
 }
 
 .basket-items-wrapper {
+    flex: 1; 
     min-height: 100px;
-    max-height: 40vh;
+    max-height: 100%; 
     overflow-y: auto;
     padding-right: 10px;
 }
@@ -2313,5 +2324,5 @@ footer {
 
 ::selection {
   background-color: #e988a0b1; 
-  color: #ffffff;          
+  color: #ffffff;       
 }
