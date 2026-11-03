@@ -1927,29 +1927,60 @@ footer {
     color: #f19fb3;
 }
 
+/* ==========================================
+    UPLOAD THUMBNAIL & SQUARE GRID PREVIEW
+   ========================================== */
 .drop-zone-thumb {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
+    background-color: #ffffff; /* Solid background to make grid pop */
+    border-radius: 12px;
+    overflow: hidden;
 }
 
+/* Creates a flex-grid to wrap multiple small square images */
+.thumb-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    /* Pads around edges to avoid the text bar and 'X' button */
+    padding: 10px 45px 35px 15px; 
+    box-sizing: border-box;
+}
+
+/* Styles each individual uploaded picture inside the drop box */
+.grid-img-preview {
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* The bottom status text indicator (x of x selected) */
 .drop-zone-thumb::after {
     content: attr(data-label);
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 8px 0;
+    padding: 6px 0;
     color: #ffffff;
-    background: rgba(165, 81, 102, 0.9);
+    background: rgba(165, 81, 102, 0.95);
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
+    z-index: 10; 
 }
 
 /* Boost CTA Contrast (Basket Button) */
@@ -2036,6 +2067,177 @@ footer {
     transform: translate(-50%, -50%) scale(1.05);
 }
 
+/* ==========================================
+    SQUARE GRID PREVIEW & BLUR (UI Fix)
+   ========================================== */
+
+/* Overrides the old single-background setup */
+.drop-zone-thumb {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: transparent !important; 
+    overflow: hidden;
+}
+
+/* Creates a flex-grid to wrap multiple small square images */
+.thumb-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    padding: 10px 40px 30px 10px; /* Pads around the edges so images don't hit the borders or the X button */
+    box-sizing: border-box;
+    transition: filter 0.3s ease;
+}
+
+/* Styles each individual uploaded picture */
+.grid-img-preview {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Blurs and darkens the entire grid when the "Add More" badge is hovering above it */
+.grid-blurred {
+    filter: blur(3px) brightness(0.8); 
+}
+
+/* ==========================================
+    SQUARE GRID MODAL & VIEW BUTTON
+   ========================================== */
+
+/* The new View Gallery Button */
+.view-thumb-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #46271f;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.view-thumb-btn:hover {
+    background-color: #1e0d09;
+    transform: scale(1.15);
+}
+
+/* Modifies the thumbnail wrapper to handle the background blur */
+.drop-zone-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: filter 0.3s ease;
+}
+
+.drop-zone-thumb::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.1); /* Slight dark tint to make badges readable */
+    z-index: 1;
+}
+
+.thumb-blurred {
+    filter: blur(2px) brightness(0.9);
+}
+
+/* -----------------------------------
+   Modal Overlay Container
+------------------------------------ */
+.modal-overlay {
+    display: none; /* Hidden by default, JS turns this to 'flex' */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+    backdrop-filter: blur(4px); /* Blurs the order form behind it */
+    z-index: 2000; /* Ensures it sits above the navbar and everything else */
+    justify-content: center;
+    align-items: center;
+}
+
+/* -----------------------------------
+   Modal Formatting
+------------------------------------ */
+.preview-modal-content {
+    background: #fff9c0;
+    border: 3px dashed #f19fb3;
+    max-width: 600px;
+    width: 90%;
+}
+
+.preview-modal-content h3 {
+    font-family: 'Poppins', sans-serif;
+    color: #e988a0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.close-preview-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #e988a0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.close-preview-modal:hover {
+    transform: scale(1.2);
+    color: #dc2b57;
+}
+
+/* The actual Square Grid layout inside the modal */
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.preview-grid-item {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Forces perfect squares */
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    border: 2px solid #ffffff;
+}
 /* ==========================================
     RESPONSIVE SPLIT LAYOUT (MOBILE)
    ========================================== */
