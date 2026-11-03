@@ -1638,6 +1638,315 @@ footer {
 }
 
 /* ==========================================
+    ORDER FORM SPLIT LAYOUT
+   ========================================== */
+.split-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between; /* Pushes the left and right columns to the sides */
+    gap: 3rem;
+    max-width: 1450px; /* Widened the container */
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 130px; 
+    padding-bottom: 80px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    box-sizing: border-box;
+}
+
+.order-form-col {
+    flex: 1;
+    max-width: 850px; /* Caps the width so it doesn't stretch infinitely on huge monitors */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Forces all inner sections to stretch uniformly */
+    gap: 2rem;
+}
+
+/* Forces the shop container and pop boxes to align edges perfectly */
+.order-shop-override {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    align-items: stretch !important; 
+    gap: 15px;
+}
+
+.order-shop-override .sizes-popup {
+    width: 100%;
+}
+
+.order-shop-override .pop-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
+.upload-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Makes the quantity boxes look clickable */
+.add-to-basket {
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.add-to-basket:active {
+    transform: scale(0.95);
+}
+
+/* ==========================================
+    STICKY SIDE BASKET
+   ========================================== */
+.basket-sidebar {
+    flex: 0 0 340px;
+    width: 340px;
+    position: sticky;
+    top: 130px; 
+    
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 25px;
+    
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1), 4px 6px 0px #ef6a80a8;
+    border: 2px dashed #f19fb3;
+    
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.basket-title {
+    font-family: 'Poppins', sans-serif;
+    color: #e988a0;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.basket-items-wrapper {
+    min-height: 100px;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+#basket-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.empty-basket {
+    text-align: center;
+    color: #a55166;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.basket-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fffbd0;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid #faebd7;
+}
+
+.basket-item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.basket-item-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #a55166;
+}
+
+.basket-item-price {
+    font-size: 0.8rem;
+    color: #e988a0;
+    font-weight: 600;
+}
+
+.basket-remove-btn {
+    background: #f19fb3;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.basket-remove-btn:hover {
+    background: #dc2b57;
+}
+
+.basket-divider {
+    border: none;
+    border-top: 2px dashed #fcd2dc;
+    margin: 20px 0;
+}
+
+.basket-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #a55166;
+    margin-bottom: 20px;
+}
+
+.checkout-full-btn {
+    width: 100%;
+    font-size: 1.05rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+    DYNAMIC DRAG & DROP ZONES
+   ========================================== */
+.upload-section {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 25px;
+    padding: 30px;
+    border: 2px dashed #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.upload-title {
+    font-family: 'Poppins', sans-serif;
+    color: #e988a0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.upload-subtitle {
+    text-align: center;
+    color: #a55166;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.empty-upload-state {
+    text-align: center;
+    background: #fffbd0;
+    color: #a55166;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.custom-drop-zone {
+    width: 100%;
+    height: 120px;
+    border: 3px dashed #f19fb3;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-drop-zone:hover {
+    background-color: #fffbd0;
+}
+
+.drop-zone-over {
+    background-color: #fdf6c6;
+    border-color: #a55166;
+}
+
+.drop-zone-input {
+    display: none;
+}
+
+.drop-zone-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a55166;
+    font-size: 0.95rem;
+}
+
+.drop-zone-prompt i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #f19fb3;
+}
+
+.drop-zone-thumb {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.drop-zone-thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px 0;
+    color: #ffffff;
+    background: rgba(165, 81, 102, 0.9);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ==========================================
+    RESPONSIVE SPLIT LAYOUT (MOBILE)
+   ========================================== */
+@media (max-width: 992px) {
+    .split-layout {
+        flex-direction: column;
+        padding-top: 150px;
+    }
+    
+    .basket-sidebar {
+        width: 100%;
+        flex: none;
+        position: relative; 
+        top: 0;
+        margin-top: 10px;
+    }
+}
+
+/* ==========================================
     DYNAMIC SCREEN RESPONSIVENESS (Media Query Engine)
    ========================================== */
 @media (max-width: 1366px) {
