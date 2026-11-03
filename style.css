@@ -1980,6 +1980,61 @@ footer {
     animation: emphaticPop 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* ==========================================
+    UPLOAD REMOVE BUTTON
+   ========================================== */
+.remove-thumb-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color:#a55166;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    z-index: 10;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.remove-thumb-btn:hover {
+    background-color: #dc2b57;
+    transform: scale(1.15);
+}
+
+/* ==========================================
+    UPLOAD "ADD MORE" BADGE
+   ========================================== */
+.add-more-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(253, 246, 198, 0.95); /* Semi-transparent yellow */
+    color: #a55166;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    
+    /* Crucial: lets clicks pass straight through the badge to the drop zone underneath */
+    pointer-events: none; 
+    z-index: 5;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.custom-drop-zone:hover .add-more-badge {
+    background-color: #fffbd0;
+    transform: translate(-50%, -50%) scale(1.05);
+}
 
 /* ==========================================
     RESPONSIVE SPLIT LAYOUT (MOBILE)

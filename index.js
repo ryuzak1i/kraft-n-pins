@@ -110,24 +110,31 @@ function updateDropZones(sizeCounts) {
         zone.innerHTML = `
             <div class="drop-zone-prompt">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                <span>Upload designs for <b>${size}mm</b> (${totalPins} pins)</span>
+                <span>Upload designs for <b>${size}mm</b> (Max: ${totalPins} images)</span>
             </div>
             <input type="file" name="files_${size}" class="drop-zone-input" multiple accept="image/*">
         `;
         wrapper.appendChild(zone);
-        bindDragAndDrop(zone);
+        
+        bindDragAndDrop(zone, totalPins);
     }
 }
 
-// 5. Handle Drag and Drop Logic
-function bindDragAndDrop(dropZoneElement) {
+// 5. Handle Drag and Drop Logic (With Incremental Uploading)
+function bindDragAndDrop(dropZoneElement, maxAllowed) {
     const inputElement = dropZoneElement.querySelector(".drop-zone-input");
+    let accumulatedFiles = []; // Acts as memory to store files incrementally
 
-    dropZoneElement.addEventListener("click", () => inputElement.click());
+    // Prevent triggering upload if clicking the 'X' remove button
+    dropZoneElement.addEventListener("click", (e) => {
+        if (!e.target.closest('.remove-thumb-btn')) {
+            inputElement.click();
+        }
+    });
 
-    inputElement.addEventListener("change", () => {
-        if (inputElement.files.length) {
-            renderThumbnail(dropZoneElement, inputElement.files);
+    inputElement.addEventListener("change", (e) => {
+        if (e.target.files.length) {
+            appendFiles(e.target.files);
         }
     });
 
@@ -142,15 +149,50 @@ function bindDragAndDrop(dropZoneElement) {
 
     dropZoneElement.addEventListener("drop", (e) => {
         e.preventDefault();
-        if (e.dataTransfer.files.length) {
-            inputElement.files = e.dataTransfer.files;
-            renderThumbnail(dropZoneElement, e.dataTransfer.files);
-        }
         dropZoneElement.classList.remove("drop-zone-over");
+        if (e.dataTransfer.files.length) {
+            appendFiles(e.dataTransfer.files);
+        }
     });
+
+    // Appends new files to the existing memory without overwriting
+    function appendFiles(newFiles) {
+        let spaceLeft = maxAllowed - accumulatedFiles.length;
+        
+        if (spaceLeft <= 0) {
+            alert(`You have already reached the maximum of ${maxAllowed} design(s).`);
+            syncInput(); // Restore the input so it doesn't break
+            return;
+        }
+
+        // Grabs only the amount of files allowed
+        let filesToAdd = Array.from(newFiles).slice(0, spaceLeft);
+        
+        if (newFiles.length > spaceLeft) {
+            alert(`You can only add ${spaceLeft} more design(s) to this size. Extra files were ignored.`);
+        }
+
+        // Add to memory and sync to the hidden HTML input
+        accumulatedFiles = accumulatedFiles.concat(filesToAdd);
+        syncInput();
+        
+        // Pass a clear function so the 'X' button knows how to wipe the memory
+        renderThumbnail(dropZoneElement, accumulatedFiles, () => {
+            accumulatedFiles = [];
+            inputElement.value = "";
+        }, maxAllowed);
+    }
+    
+    // Updates the actual <input> element so the form works upon submission
+    function syncInput() {
+        const dt = new DataTransfer();
+        accumulatedFiles.forEach(file => dt.items.add(file));
+        inputElement.files = dt.files;
+    }
 }
 
-function renderThumbnail(dropZoneElement, files) {
+// 6. Renders the Thumbnail and Handles UI Indicators
+function renderThumbnail(dropZoneElement, files, clearMemoryCallback, maxAllowed) {
     let thumbnailElement = dropZoneElement.querySelector(".drop-zone-thumb");
     let promptElement = dropZoneElement.querySelector(".drop-zone-prompt");
 
@@ -162,11 +204,44 @@ function renderThumbnail(dropZoneElement, files) {
         dropZoneElement.appendChild(thumbnailElement);
     }
 
-    const fileCount = files.length;
-    thumbnailElement.dataset.label = fileCount > 1 ? `${fileCount} images selected` : files[0].name;
+    // Add the remove/cancel 'X' button
+    let removeBtn = thumbnailElement.querySelector(".remove-thumb-btn");
+    if (!removeBtn) {
+        removeBtn = document.createElement("button");
+        removeBtn.className = "remove-thumb-btn";
+        removeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        thumbnailElement.appendChild(removeBtn);
 
-    // Show preview of the first image
-    if (files[0].type.startsWith("image/")) {
+        removeBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); 
+            if (clearMemoryCallback) clearMemoryCallback(); 
+            thumbnailElement.remove(); 
+            if (promptElement) promptElement.style.display = 'flex'; 
+        });
+    }
+
+    // Dynamic "Add More" Badge and Text
+    const fileCount = files.length;
+    let addMoreBadge = thumbnailElement.querySelector(".add-more-badge");
+
+    if (fileCount < maxAllowed) {
+        // If they have space left, show the badge and prompt text
+        thumbnailElement.dataset.label = `${fileCount} of ${maxAllowed} selected (Click to add more)`;
+        
+        if (!addMoreBadge) {
+            addMoreBadge = document.createElement("div");
+            addMoreBadge.className = "add-more-badge";
+            addMoreBadge.innerHTML = '<i class="fa-solid fa-plus"></i> Add More';
+            thumbnailElement.appendChild(addMoreBadge);
+        }
+    } else {
+        // If they hit the limit, remove the badge and change the text
+        if (addMoreBadge) addMoreBadge.remove();
+        thumbnailElement.dataset.label = `Max ${maxAllowed} images selected`;
+    }
+
+    // Show preview of the very first image
+    if (files[0] && files[0].type.startsWith("image/")) {
         const reader = new FileReader();
         reader.readAsDataURL(files[0]);
         reader.onload = () => {
