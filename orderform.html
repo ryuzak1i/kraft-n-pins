@@ -158,19 +158,40 @@
                 <span id="basket-total-price">PHP 0</span>
             </div>
 
-            <!-- NEW: Dynamic Processing Time & Rush Option -->
-            <div class="processing-time-box">
-                <i class="fa-regular fa-clock"></i>
-                <span id="processing-time-text">Estimated Processing: <b>--</b></span>
+           <!-- NEW: Sleek Rush Order Toggle -->
+            <div class="rush-order-wrapper">
+                <span class="rush-label">Rush Order Request</span>
+                <label class="rush-switch">
+                    <input type="checkbox" id="rush-order-checkbox">
+                    <span class="rush-slider"></span>
+                </label>
             </div>
-            
-            <label class="rush-order-container">
-                <input type="checkbox" id="rush-order-checkbox">
-                <span>Rush Order Request (Make it a Priority!)</span>
-            </label>
 
-            <button id="checkout-submit-btn" class="btn btn-yellow checkout-full-btn">Proceed to DMs <i class="fa-solid fa-paper-plane"></i></button>
+            <button id="checkout-submit-btn" class="btn btn-yellow checkout-full-btn">Review Order <i class="fa-solid fa-receipt"></i></button>
         </aside>
+
+        <!-- NEW: Order Receipt Summary Modal -->
+        <div id="receipt-modal" class="modal-overlay">
+            <div class="modal-content receipt-modal-content">
+                <span class="close-receipt-modal"><i class="fa-solid fa-xmark"></i></span>
+                <h3 class="receipt-title">✧ Order Summary ✧</h3>
+                
+                <div class="receipt-body">
+                    <ul id="receipt-items-list"></ul>
+                    <hr class="basket-divider">
+                    <div class="receipt-total-row">
+                        <span>Total:</span>
+                        <span id="receipt-final-total">PHP 0</span>
+                    </div>
+                    
+                    <div class="processing-time-box" id="receipt-processing-time">
+                        <!-- JS injects processing time here -->
+                    </div>
+                </div>
+
+                <button id="confirm-order-btn" class="btn btn-yellow checkout-full-btn">Confirm & Send to DMs <i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
 
     </main>
 

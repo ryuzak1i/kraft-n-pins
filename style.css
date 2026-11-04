@@ -2399,6 +2399,72 @@ footer {
 }
 
 /* ==========================================
+    BASKET PROCESSING TIME & RUSH ORDER
+   ========================================== */
+.processing-time-box {
+    background-color: rgba(253, 246, 198, 0.5); /* Soft yellow */
+    border: 1px dashed #e988a0;
+    color: #a55166;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.processing-time-box i {
+    font-size: 1rem;
+    color: #e988a0;
+}
+
+.rush-order-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #dc2b57;
+    transition: transform 0.2s ease;
+}
+
+.rush-order-container:hover {
+    transform: scale(1.02);
+}
+
+.rush-order-container input[type="checkbox"] {
+    appearance: none;
+    background-color: #ffffff;
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e988a0;
+    border-radius: 4px;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.rush-order-container input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #dc2b57;
+    border-radius: 2px;
+}
+
+.rush-order-container input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+/* ==========================================
     DYNAMIC SCREEN RESPONSIVENESS (Media Query Engine)
    ========================================== */
 @media (max-width: 1366px) {

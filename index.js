@@ -54,17 +54,20 @@ function updateBasketUI() {
     const list = document.getElementById('basket-items-list');
     list.innerHTML = '';
     let totalAmount = 0;
+    let totalPins = 0; // Tracks total pin quantity
     let sizeCounts = {}; 
 
     if (orderBasket.length === 0) {
         list.innerHTML = '<li class="empty-basket">No pins added yet!</li>';
         document.getElementById('basket-total-price').innerText = 'PHP 0';
+        document.getElementById('processing-time-text').innerHTML = 'Estimated Processing: <b>--</b>';
         updateDropZones({});
         return;
     }
 
     orderBasket.forEach(item => {
         totalAmount += item.price;
+        totalPins += item.pinQty;
         sizeCounts[item.size] = (sizeCounts[item.size] || 0) + item.pinQty;
 
         const li = document.createElement('li');
@@ -80,6 +83,15 @@ function updateBasketUI() {
     });
 
     document.getElementById('basket-total-price').innerText = 'PHP ' + totalAmount;
+    
+    // Dynamic Processing Time Logic
+    const processingText = document.getElementById('processing-time-text');
+    if (totalPins >= 30) {
+        processingText.innerHTML = 'Processing: <b>5-10 business days</b> (Bulk)';
+    } else {
+        processingText.innerHTML = 'Processing: <b>1-2 business days</b> (Standard)';
+    }
+
     updateDropZones(sizeCounts);
 }
 
@@ -297,10 +309,18 @@ if (submitBtn) {
             alert("Please add items to your basket first!");
             return;
         }
+        
+        const isRush = document.getElementById('rush-order-checkbox').checked;
         let orderString = "Hi! I'd like to place an order:%0A";
+        
+        if (isRush) {
+            orderString = "🚨 RUSH ORDER REQUEST 🚨%0A%0AHi! I'd like to place a priority order:%0A";
+        }
+
         orderBasket.forEach(item => {
             orderString += `- ${item.size}mm ${item.type}%0A`;
         });
+        
         orderString += `%0ATotal: ${document.getElementById('basket-total-price').innerText}`;
         
         window.open(`https://ig.me/m/kraftnpins?text=${orderString}`, '_blank');
