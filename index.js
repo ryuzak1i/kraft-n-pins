@@ -54,20 +54,17 @@ function updateBasketUI() {
     const list = document.getElementById('basket-items-list');
     list.innerHTML = '';
     let totalAmount = 0;
-    let totalPins = 0; // Tracks total pin quantity
     let sizeCounts = {}; 
 
     if (orderBasket.length === 0) {
         list.innerHTML = '<li class="empty-basket">No pins added yet!</li>';
         document.getElementById('basket-total-price').innerText = 'PHP 0';
-        document.getElementById('processing-time-text').innerHTML = 'Estimated Processing: <b>--</b>';
         updateDropZones({});
         return;
     }
 
     orderBasket.forEach(item => {
         totalAmount += item.price;
-        totalPins += item.pinQty;
         sizeCounts[item.size] = (sizeCounts[item.size] || 0) + item.pinQty;
 
         const li = document.createElement('li');
@@ -83,15 +80,6 @@ function updateBasketUI() {
     });
 
     document.getElementById('basket-total-price').innerText = 'PHP ' + totalAmount;
-    
-    // Dynamic Processing Time Logic
-    const processingText = document.getElementById('processing-time-text');
-    if (totalPins >= 30) {
-        processingText.innerHTML = 'Processing: <b>5-10 business days</b> (Bulk)';
-    } else {
-        processingText.innerHTML = 'Processing: <b>1-2 business days</b> (Standard)';
-    }
-
     updateDropZones(sizeCounts);
 }
 
@@ -301,15 +289,63 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
     }
 }
 
-// Proceed to DM Button Setup
+// ==========================================
+// RECEIPT MODAL & CHECKOUT LOGIC
+// ==========================================
 const submitBtn = document.getElementById('checkout-submit-btn');
-if (submitBtn) {
+const receiptModal = document.getElementById('receipt-modal');
+
+if (submitBtn && receiptModal) {
+    // 1. Open the summary receipt
     submitBtn.addEventListener('click', () => {
         if(orderBasket.length === 0) {
             alert("Please add items to your basket first!");
             return;
         }
         
+        const receiptList = document.getElementById('receipt-items-list');
+        receiptList.innerHTML = '';
+        let totalPins = 0;
+        let totalAmount = 0;
+
+        orderBasket.forEach(item => {
+            totalPins += item.pinQty;
+            totalAmount += item.price;
+            
+            const li = document.createElement('li');
+            li.className = 'receipt-item-row';
+            li.innerHTML = `<span>${item.pinQty}x ${item.size}mm (${item.type})</span> <span>PHP ${item.price}</span>`;
+            receiptList.appendChild(li);
+        });
+
+        document.getElementById('receipt-final-total').innerText = 'PHP ' + totalAmount;
+
+        // Calculate Processing Time
+        const isRush = document.getElementById('rush-order-checkbox').checked;
+        const processingBox = document.getElementById('receipt-processing-time');
+        
+        if (isRush) {
+            processingBox.innerHTML = '<i class="fa-solid fa-bolt"></i> <span>Processing: <b>Priority (Rush Order)</b></span>';
+            processingBox.style.backgroundColor = '#fdf6c6';
+            processingBox.style.borderColor = '#e988a0';
+        } else if (totalPins >= 30) {
+            processingBox.innerHTML = '<i class="fa-regular fa-clock"></i> <span>Processing: <b>5-10 business days</b> (Bulk)</span>';
+            processingBox.style.backgroundColor = '#ffffff';
+        } else {
+            processingBox.innerHTML = '<i class="fa-regular fa-clock"></i> <span>Processing: <b>1-2 business days</b> (Standard)</span>';
+            processingBox.style.backgroundColor = '#ffffff';
+        }
+
+        receiptModal.style.display = 'flex';
+    });
+
+    // 2. Close Modal Logic
+    receiptModal.querySelector('.close-receipt-modal').addEventListener('click', () => {
+        receiptModal.style.display = 'none';
+    });
+
+    // 3. Confirm & Send to Instagram
+    document.getElementById('confirm-order-btn').addEventListener('click', () => {
         const isRush = document.getElementById('rush-order-checkbox').checked;
         let orderString = "Hi! I'd like to place an order:%0A";
         
@@ -324,58 +360,8 @@ if (submitBtn) {
         orderString += `%0ATotal: ${document.getElementById('basket-total-price').innerText}`;
         
         window.open(`https://ig.me/m/kraftnpins?text=${orderString}`, '_blank');
+        receiptModal.style.display = 'none';
     });
-}
-
-// ==========================================
-// SQUARE GRID PREVIEW MODAL
-// ==========================================
-function openPreviewModal(files, size) {
-    let modal = document.getElementById('image-preview-modal');
-    
-    // Create the modal if it doesn't exist in the DOM yet
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'image-preview-modal';
-        modal.className = 'modal-overlay';
-        modal.innerHTML = `
-            <div class="modal-content preview-modal-content">
-                <span class="close-preview-modal"><i class="fa-solid fa-xmark"></i></span>
-                <h3 id="preview-modal-title"></h3>
-                <div class="preview-grid" id="preview-grid-container"></div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-
-        // Close logic
-        modal.querySelector('.close-preview-modal').addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.style.display = 'none';
-        });
-    }
-
-    // Populate the modal data
-    document.getElementById('preview-modal-title').innerText = `${size}mm Uploaded Designs`;
-    const grid = document.getElementById('preview-grid-container');
-    grid.innerHTML = ''; // Wipe previous images
-
-    files.forEach(file => {
-        if (file.type.startsWith("image/")) {
-            const imgWrapper = document.createElement('div');
-            imgWrapper.className = 'preview-grid-item';
-            
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                imgWrapper.style.backgroundImage = `url('${reader.result}')`;
-            };
-            grid.appendChild(imgWrapper);
-        }
-    });
-
-    modal.style.display = 'flex'; // Show the modal
 }
 
 // ==========================================

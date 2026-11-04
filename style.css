@@ -2399,70 +2399,156 @@ footer {
 }
 
 /* ==========================================
-    BASKET PROCESSING TIME & RUSH ORDER
+    SLEEK RUSH ORDER TOGGLE
    ========================================== */
-.processing-time-box {
-    background-color: rgba(253, 246, 198, 0.5); /* Soft yellow */
-    border: 1px dashed #e988a0;
-    color: #a55166;
-    padding: 10px;
+.rush-order-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fffbd0;
+    padding: 12px 15px;
     border-radius: 12px;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #faebd7;
 }
 
-.processing-time-box i {
-    font-size: 1rem;
-    color: #e988a0;
-}
-
-.rush-order-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    font-size: 0.8rem;
+.rush-label {
+    font-size: 0.85rem;
     font-weight: 700;
-    color: #dc2b57;
+    color: #a55166;
+}
+
+/* The Toggle Switch */
+.rush-switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.rush-switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.rush-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #fabbcb; /* Soft pink when off */
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.rush-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
+.rush-switch input:checked + .rush-slider {
+    background-color: #e988a0; /* Deep pink when on */
+}
+
+.rush-switch input:checked + .rush-slider:before {
+    transform: translateX(18px);
+}
+
+/* ==========================================
+    RECEIPT SUMMARY MODAL
+   ========================================== */
+.receipt-modal-content {
+    background: #ffffff;
+    border: 3px dashed #f19fb3;
+    max-width: 450px;
+    width: 90%;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.receipt-title {
+    font-family: 'Poppins', sans-serif;
+    color: #e988a0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.close-receipt-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #e988a0;
+    cursor: pointer;
     transition: transform 0.2s ease;
 }
 
-.rush-order-container:hover {
-    transform: scale(1.02);
+.close-receipt-modal:hover {
+    transform: scale(1.2);
+    color: #dc2b57;
 }
 
-.rush-order-container input[type="checkbox"] {
-    appearance: none;
-    background-color: #ffffff;
+.receipt-body {
+    background: #fffdf5;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #faebd7;
+}
+
+#receipt-items-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #e988a0;
-    border-radius: 4px;
-    display: grid;
-    place-content: center;
-    cursor: pointer;
+    margin-bottom: 15px;
 }
 
-.rush-order-container input[type="checkbox"]::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em #dc2b57;
-    border-radius: 2px;
+.receipt-item-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #5e2e3a;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
-.rush-order-container input[type="checkbox"]:checked::before {
-    transform: scale(1);
+.receipt-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #e988a0;
+    margin-bottom: 15px;
 }
+
+.processing-time-box {
+    border: 2px dashed #fcd2dc;
+    color: #a55166;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.processing-time-box i {
+    font-size: 1.1rem;
+    color: #e988a0;
+}
+
 
 /* ==========================================
     DYNAMIC SCREEN RESPONSIVENESS (Media Query Engine)
