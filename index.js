@@ -302,6 +302,25 @@ if (submitBtn && receiptModal) {
             alert("Please add items to your basket first!");
             return;
         }
+
+        // --- NEW: REQUIRE UPLOADS BEFORE CHECKOUT ---
+        // 1. Find out which sizes the user has actually added to their basket
+        const requiredSizes = new Set(orderBasket.map(item => item.size));
+        let missingSizes = [];
+
+        // 2. Check if the memory array for those specific sizes is empty
+        requiredSizes.forEach(size => {
+            if (uploadedFilesState[size].length === 0) {
+                missingSizes.push(`${size}mm`);
+            }
+        });
+
+        // 3. Block checkout and alert the user if any required sizes are missing designs
+        if (missingSizes.length > 0) {
+            alert(`Upload Required: Please add at least 1 design for your ${missingSizes.join(' and ')} pins before reviewing your order!`);
+            return; // Stops the script so the receipt modal will not open
+        }
+        // --------------------------------------------
         
         const receiptList = document.getElementById('receipt-items-list');
         receiptList.innerHTML = '';
@@ -368,7 +387,7 @@ if (submitBtn && receiptModal) {
     receiptModal.querySelector('.close-receipt-modal').addEventListener('click', () => {
         receiptModal.style.display = 'none';
     });
-
+    
     // 3. Confirm & Send to Instagram
     document.getElementById('confirm-order-btn').addEventListener('click', () => {
         const isRush = document.getElementById('rush-order-checkbox').checked;
