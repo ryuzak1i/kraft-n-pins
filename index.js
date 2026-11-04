@@ -308,13 +308,36 @@ if (submitBtn && receiptModal) {
         let totalPins = 0;
         let totalAmount = 0;
 
+        // Combine (Aggregate) identical items in the basket
+        const aggregatedBasket = {};
         orderBasket.forEach(item => {
             totalPins += item.pinQty;
             totalAmount += item.price;
             
+            const key = `${item.size}-${item.type}`;
+            if (!aggregatedBasket[key]) {
+                aggregatedBasket[key] = {
+                    size: item.size,
+                    type: item.type,
+                    price: item.price,
+                    count: 0
+                };
+            }
+            aggregatedBasket[key].count += 1;
+            aggregatedBasket[key].totalRowPrice = aggregatedBasket[key].count * item.price;
+        });
+
+        // Print the grouped items to the receipt
+        Object.values(aggregatedBasket).forEach(group => {
             const li = document.createElement('li');
             li.className = 'receipt-item-row';
-            li.innerHTML = `<span>${item.pinQty}x ${item.size}mm (${item.type})</span> <span>PHP ${item.price}</span>`;
+            li.innerHTML = `
+                <div class="receipt-item-details">
+                    <span class="receipt-item-title">${group.size}mm [${group.type}]</span>
+                    <span class="receipt-item-qty">Quantity: ${group.count}</span>
+                </div> 
+                <span>PHP ${group.totalRowPrice}</span>
+            `;
             receiptList.appendChild(li);
         });
 
@@ -331,9 +354,11 @@ if (submitBtn && receiptModal) {
         } else if (totalPins >= 30) {
             processingBox.innerHTML = '<i class="fa-regular fa-clock"></i> <span>Processing: <b>5-10 business days</b> (Bulk)</span>';
             processingBox.style.backgroundColor = '#ffffff';
+            processingBox.style.borderColor = '#fcd2dc';
         } else {
             processingBox.innerHTML = '<i class="fa-regular fa-clock"></i> <span>Processing: <b>1-2 business days</b> (Standard)</span>';
             processingBox.style.backgroundColor = '#ffffff';
+            processingBox.style.borderColor = '#fcd2dc';
         }
 
         receiptModal.style.display = 'flex';
@@ -353,8 +378,18 @@ if (submitBtn && receiptModal) {
             orderString = "🚨 RUSH ORDER REQUEST 🚨%0A%0AHi! I'd like to place a priority order:%0A";
         }
 
+        // Aggregate again for the DM message
+        const dmBasket = {};
         orderBasket.forEach(item => {
-            orderString += `- ${item.size}mm ${item.type}%0A`;
+            const key = `${item.size}-${item.type}`;
+            if (!dmBasket[key]) {
+                dmBasket[key] = { size: item.size, type: item.type, count: 0 };
+            }
+            dmBasket[key].count += 1;
+        });
+
+        Object.values(dmBasket).forEach(group => {
+            orderString += `- ${group.count}x ${group.size}mm [${group.type}]%0A`;
         });
         
         orderString += `%0ATotal: ${document.getElementById('basket-total-price').innerText}`;

@@ -2113,62 +2113,6 @@ footer {
     filter: blur(3px) brightness(0.8); 
 }
 
-/* ==========================================
-    SQUARE GRID MODAL & VIEW BUTTON
-   ========================================== */
-
-/* The new View Gallery Button */
-.view-thumb-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #46271f;
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.9rem;
-    z-index: 10;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.view-thumb-btn:hover {
-    background-color: #1e0d09;
-    transform: scale(1.15);
-}
-
-/* Modifies the thumbnail wrapper to handle the background blur */
-.drop-zone-thumb {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: filter 0.3s ease;
-}
-
-.drop-zone-thumb::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.1); /* Slight dark tint to make badges readable */
-    z-index: 1;
-}
-
-.thumb-blurred {
-    filter: blur(2px) brightness(0.9);
-}
-
 /* -----------------------------------
    Modal Overlay Container
 ------------------------------------ */
@@ -2248,7 +2192,7 @@ footer {
     position: absolute;
     top: 10px;
     left: 10px; /* Placed on the top-left to balance the X button */
-    background-color: #46271f;
+    background-color: #a55166;
     color: #ffffff;
     border: none;
     border-radius: 50%;
@@ -2265,7 +2209,7 @@ footer {
 }
 
 .view-thumb-btn:hover {
-    background-color: #1e0d09;
+    background-color: #a55166;
     transform: scale(1.15);
 }
 
@@ -2432,15 +2376,18 @@ footer {
     height: 0;
 }
 
+/* The slider background when OFF (Inactive) */
 .rush-slider {
     position: absolute;
     cursor: pointer;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #fabbcb; /* Soft pink when off */
+    background-color: #d6c5c8; /* Muted grey-pink so it clearly looks "off" */
     transition: 0.3s;
     border-radius: 24px;
+    box-shadow: inset 0px 2px 4px rgba(0,0,0,0.1); /* Adds a slight inner shadow */
 }
 
+/* The white knob */
 .rush-slider:before {
     position: absolute;
     content: "";
@@ -2454,8 +2401,9 @@ footer {
     box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 }
 
+/* The slider background when ON (Active) */
 .rush-switch input:checked + .rush-slider {
-    background-color: #e988a0; /* Deep pink when on */
+    background-color: #e988a0; /* A much darker, bolder pink for maximum contrast */
 }
 
 .rush-switch input:checked + .rush-slider:before {
@@ -2517,10 +2465,28 @@ footer {
 .receipt-item-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 0.85rem;
     color: #5e2e3a;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.receipt-item-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.receipt-item-title {
+    color: #a55166;
+    font-weight: 700;
+}
+
+.receipt-item-qty {
+    font-size: 0.75rem;
+    opacity: 0.55; /* Lowers the opacity so it sits softly underneath */
+    margin-top: 2px;
 }
 
 .receipt-total-row {
@@ -2547,6 +2513,22 @@ footer {
 .processing-time-box i {
     font-size: 1.1rem;
     color: #e988a0;
+}
+
+/* ==========================================
+    CONFIRM & SEND BUTTON (Pink Palette)
+   ========================================== */
+.btn-pink-checkout {
+    background-color: #e988a0 !important; /* Forces the pink background */
+    color: #ffffff !important;           /* Forces the white text */
+    border: none;
+    box-shadow: 0px 4px 12px rgba(233, 136, 160, 0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-pink-checkout:hover {
+    background-color: #dc2b57 !important; /* Slightly darker pink on hover */
+    transform: translateY(-2px);
 }
 
 
