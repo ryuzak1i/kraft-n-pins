@@ -152,11 +152,23 @@
                     <li class="empty-basket">No pins added yet!</li>
                 </ul>
             </div>
-            <hr class="basket-divider">
+            <hrF class="basket-divider">
             <div class="basket-total-row">
                 <span>Total:</span>
                 <span id="basket-total-price">PHP 0</span>
             </div>
+
+            <!-- NEW: Dynamic Processing Time & Rush Option -->
+            <div class="processing-time-box">
+                <i class="fa-regular fa-clock"></i>
+                <span id="processing-time-text">Estimated Processing: <b>--</b></span>
+            </div>
+            
+            <label class="rush-order-container">
+                <input type="checkbox" id="rush-order-checkbox">
+                <span>Rush Order Request (Make it a Priority!)</span>
+            </label>
+
             <button id="checkout-submit-btn" class="btn btn-yellow checkout-full-btn">Proceed to DMs <i class="fa-solid fa-paper-plane"></i></button>
         </aside>
 

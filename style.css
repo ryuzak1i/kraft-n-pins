@@ -2361,6 +2361,43 @@ footer {
     }
 }
 
+/* Highlights the selected size emphasis in pink */
+.drop-zone-prompt b {
+    color: #e988a0; 
+    font-weight: 800;
+    transition: color 0.2s ease;
+}
+
+/* Optional: Makes it an even slightly deeper pink when the box turns yellow on hover */
+.custom-drop-zone:hover .drop-zone-prompt b {
+    color: #dc2b57; 
+}
+
+/* ==========================================
+    CLICK INVERSIONS (Yellow Box + Pink Text)
+   ========================================== */
+
+/* 1. Top Radio Buttons: Turns the selected radio box yellow with pink text */
+.sizes div:has(input[type="radio"]:checked) {
+    background-color: #fdf6c6 !important; /* Soft yellow */
+    color: #e988a0 !important; /* Pink text */
+    box-shadow: 0px 4px 10px rgba(233, 136, 160, 0.15) !important;
+}
+
+/* 2. Sizes-Popup Bundle Boxes: Inverts the white text to pink while the box flashes yellow */
+@keyframes emphaticTextInvert {
+    0%   { color: #ffffff; }
+    40%  { color: #e988a0; text-shadow: none; } /* Turns pink exactly when the background pops yellow */
+    70%  { color: #ffffff; }
+    100% { color: #ffffff; }
+}
+
+.add-to-basket.clicked-animation #qty,
+.add-to-basket.clicked-animation #amount,
+.add-to-basket.clicked-animation #qty-descrip {
+    animation: emphaticTextInvert 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 /* ==========================================
     DYNAMIC SCREEN RESPONSIVENESS (Media Query Engine)
    ========================================== */
