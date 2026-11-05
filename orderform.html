@@ -45,7 +45,6 @@
         <!-- LEFT COLUMN: Shop Selection & Uploads -->
         <div class="order-form-col">
             <section class="shop order-shop-override">
-
                 <!-- Sizes Toggle -->
                 <div class="sizes">
                     <div class="radio-25">
@@ -139,6 +138,21 @@
                 <div id="drop-zones-wrapper">
                     <!-- JS injects drop zones here based on basket -->
                     <div class="empty-upload-state">Basket is empty. Select sizes above!</div>
+                </div>
+            </section>
+
+            <!-- NEW: UPGRADES SECTION -->
+            <section class="upload-section" id="upgrades-section" style="display: none; margin-top: 2rem;">
+                <h3 class="upload-title">✧ Add Some Sparkle! ✧</h3>
+                <p class="upload-subtitle">Upgrade your pins with Rainbow Holographic Film (+PHP 6 per pin)</p>
+                
+                <div class="upgrade-actions">
+                    <button id="select-all-holo-btn" class="btn btn-white holo-btn">✨ Select All</button>
+                    <button id="deselect-all-holo-btn" class="btn btn-white holo-btn" style="display:none;">Undo All</button>
+                </div>
+
+                <div id="holo-items-wrapper">
+                    <!-- JS injects individual pin toggles here -->
                 </div>
             </section>
         </div>

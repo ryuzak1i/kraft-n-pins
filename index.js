@@ -13,8 +13,8 @@ if(hamburger) {
 // INTERACTIVE ORDERING & BASKET LOGIC
 // ==========================================
 let orderBasket = [];
-// NEW: Global memory to preserve uploaded files across basket clicks!
 let uploadedFilesState = { '25': [], '32': [], '58': [] }; 
+let holoUpgradesState = {}; 
 
 document.querySelectorAll('.add-to-basket').forEach(box => {
     box.addEventListener('click', function() {
@@ -42,7 +42,6 @@ document.querySelectorAll('.add-to-basket').forEach(box => {
 
         updateBasketUI();
         
-        // Emphatic bounce and color flash animation
         this.classList.add('clicked-animation');
         setTimeout(() => {
             this.classList.remove('clicked-animation');
@@ -52,40 +51,111 @@ document.querySelectorAll('.add-to-basket').forEach(box => {
 
 function updateBasketUI() {
     const list = document.getElementById('basket-items-list');
+    const upgradesSection = document.getElementById('upgrades-section');
+    const holoWrapper = document.getElementById('holo-items-wrapper');
+    
     list.innerHTML = '';
+    holoWrapper.innerHTML = '';
     let totalAmount = 0;
     let sizeCounts = {}; 
 
     if (orderBasket.length === 0) {
         list.innerHTML = '<li class="empty-basket">No pins added yet!</li>';
         document.getElementById('basket-total-price').innerText = 'PHP 0';
+        upgradesSection.style.display = 'none';
         updateDropZones({});
+        holoUpgradesState = {};
         return;
     }
 
+    upgradesSection.style.display = 'block';
+
     orderBasket.forEach(item => {
-        totalAmount += item.price;
+        if (holoUpgradesState[item.id] === undefined) {
+            holoUpgradesState[item.id] = false;
+        }
+
+        let itemTotal = item.price;
+        if (holoUpgradesState[item.id]) {
+            itemTotal += (6 * item.pinQty);
+        }
+
+        totalAmount += itemTotal;
         sizeCounts[item.size] = (sizeCounts[item.size] || 0) + item.pinQty;
 
+        // Populate Main Basket
         const li = document.createElement('li');
         li.className = 'basket-list-item';
         li.innerHTML = `
             <div class="basket-item-info">
-                <span class="basket-item-name">${item.size}mm — ${item.type}</span>
-                <span class="basket-item-price">PHP ${item.price}</span>
+                <span class="basket-item-name">${item.size}mm — ${item.type} ${holoUpgradesState[item.id] ? '✨' : ''}</span>
+                <span class="basket-item-price">PHP ${itemTotal}</span>
             </div>
             <button class="basket-remove-btn" onclick="removeItem(${item.id})"><i class="fa-solid fa-xmark"></i></button>
         `;
         list.appendChild(li);
+
+        // Populate Upgrades Section
+        const holoBox = document.createElement('label');
+        holoBox.className = 'holo-toggle-box';
+        holoBox.innerHTML = `
+            <div class="holo-info">
+                <span class="holo-name">${item.size}mm [${item.type}]</span>
+                <span class="holo-price">+PHP ${6 * item.pinQty}</span>
+            </div>
+            <input type="checkbox" class="holo-checkbox" data-id="${item.id}" ${holoUpgradesState[item.id] ? 'checked' : ''}>
+            <span class="holo-custom-check"></span>
+        `;
+        holoWrapper.appendChild(holoBox);
     });
 
     document.getElementById('basket-total-price').innerText = 'PHP ' + totalAmount;
     updateDropZones(sizeCounts);
+
+    // Event listeners for individual checkboxes
+    document.querySelectorAll('.holo-checkbox').forEach(box => {
+        box.addEventListener('change', (e) => {
+            const itemId = parseInt(e.target.getAttribute('data-id'));
+            holoUpgradesState[itemId] = e.target.checked;
+            updateBasketUI(); 
+        });
+    });
+    
+    updateSelectAllButtons();
 }
 
 function removeItem(id) {
     orderBasket = orderBasket.filter(item => item.id !== id);
+    delete holoUpgradesState[id];
     updateBasketUI();
+}
+
+// ==========================================
+// UPGRADES (Select All Logic)
+// ==========================================
+const selectAllBtn = document.getElementById('select-all-holo-btn');
+const deselectAllBtn = document.getElementById('deselect-all-holo-btn');
+
+if (selectAllBtn) {
+    selectAllBtn.addEventListener('click', () => {
+        orderBasket.forEach(item => holoUpgradesState[item.id] = true);
+        updateBasketUI();
+    });
+    deselectAllBtn.addEventListener('click', () => {
+        orderBasket.forEach(item => holoUpgradesState[item.id] = false);
+        updateBasketUI();
+    });
+}
+
+function updateSelectAllButtons() {
+    const allSelected = orderBasket.length > 0 && orderBasket.every(item => holoUpgradesState[item.id]);
+    if (allSelected) {
+        selectAllBtn.style.display = 'none';
+        deselectAllBtn.style.display = 'inline-block';
+    } else {
+        selectAllBtn.style.display = 'inline-block';
+        deselectAllBtn.style.display = 'none';
+    }
 }
 
 // ==========================================
@@ -115,9 +185,7 @@ function updateDropZones(sizeCounts) {
         
         bindDragAndDrop(zone, totalPins, size);
 
-        // MEMORY RECOVERY: If files were already uploaded for this size, restore them immediately!
         if (uploadedFilesState[size].length > 0) {
-            // Trim files if they deleted a bundle from the basket making the max smaller
             if (uploadedFilesState[size].length > totalPins) {
                 uploadedFilesState[size] = uploadedFilesState[size].slice(0, totalPins);
             }
@@ -136,16 +204,12 @@ function bindDragAndDrop(dropZoneElement, maxAllowed, size) {
     const inputElement = dropZoneElement.querySelector(".drop-zone-input");
 
     dropZoneElement.addEventListener("click", (e) => {
-        // Prevent upload prompt if clicking the X or View buttons
         if (e.target.closest('.remove-thumb-btn') || e.target.closest('.view-thumb-btn')) {
             return;
         }
-        
-        // 1. UPLOAD LOCKOUT: Prevent clicking if the max limit is reached!
         if (uploadedFilesState[size].length >= maxAllowed) {
             return; 
         }
-
         inputElement.click();
     });
 
@@ -155,7 +219,6 @@ function bindDragAndDrop(dropZoneElement, maxAllowed, size) {
 
     dropZoneElement.addEventListener("dragover", (e) => {
         e.preventDefault();
-        // Only show hover effect if they still have space
         if (uploadedFilesState[size].length < maxAllowed) {
             dropZoneElement.classList.add("drop-zone-over");
         }
@@ -214,7 +277,6 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
         dropZoneElement.appendChild(thumbnailElement);
     }
 
-    // 1. Remove/Cancel Button ('X')
     let removeBtn = thumbnailElement.querySelector(".remove-thumb-btn");
     if (!removeBtn) {
         removeBtn = document.createElement("button");
@@ -227,17 +289,17 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
             uploadedFilesState[size] = []; 
             inputElement.value = ""; 
             thumbnailElement.remove(); 
-            dropZoneElement.classList.remove("is-full"); // Re-enables clicking
+            dropZoneElement.classList.remove("is-full"); 
             if (promptElement) promptElement.style.display = 'flex'; 
         });
     }
 
-    // 2. View Summary Button (Expand Icon)
     let viewBtn = thumbnailElement.querySelector(".view-thumb-btn");
     if (!viewBtn) {
         viewBtn = document.createElement("button");
         viewBtn.className = "view-thumb-btn";
         viewBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+        viewBtn.style.setProperty('background-color', '#a55166', 'important');
         thumbnailElement.appendChild(viewBtn);
 
         viewBtn.addEventListener("click", (e) => {
@@ -246,7 +308,6 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
         });
     }
 
-    // 3. Inline Square Grid Preview
     let gridContainer = thumbnailElement.querySelector(".thumb-grid-container");
     if (!gridContainer) {
         gridContainer = document.createElement("div");
@@ -268,7 +329,6 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
         }
     });
 
-    // 4. Dynamic "Add More" Badge and Full State Lockout
     const fileCount = files.length;
     let addMoreBadge = thumbnailElement.querySelector(".add-more-badge");
 
@@ -283,7 +343,7 @@ function renderThumbnail(dropZoneElement, files, size, maxAllowed) {
             thumbnailElement.appendChild(addMoreBadge);
         }
     } else {
-        dropZoneElement.classList.add("is-full"); // Triggers CSS cursor lock
+        dropZoneElement.classList.add("is-full"); 
         if (addMoreBadge) addMoreBadge.remove();
         thumbnailElement.dataset.label = `Max ${maxAllowed} images selected`;
     }
@@ -296,64 +356,69 @@ const submitBtn = document.getElementById('checkout-submit-btn');
 const receiptModal = document.getElementById('receipt-modal');
 
 if (submitBtn && receiptModal) {
-    // 1. Open the summary receipt
     submitBtn.addEventListener('click', () => {
         if(orderBasket.length === 0) {
             alert("Please add items to your basket first!");
             return;
         }
 
-        // --- NEW: REQUIRE UPLOADS BEFORE CHECKOUT ---
-        // 1. Find out which sizes the user has actually added to their basket
         const requiredSizes = new Set(orderBasket.map(item => item.size));
         let missingSizes = [];
 
-        // 2. Check if the memory array for those specific sizes is empty
         requiredSizes.forEach(size => {
             if (uploadedFilesState[size].length === 0) {
                 missingSizes.push(`${size}mm`);
             }
         });
 
-        // 3. Block checkout and alert the user if any required sizes are missing designs
         if (missingSizes.length > 0) {
             alert(`Upload Required: Please add at least 1 design for your ${missingSizes.join(' and ')} pins before reviewing your order!`);
-            return; // Stops the script so the receipt modal will not open
+            return; 
         }
-        // --------------------------------------------
         
         const receiptList = document.getElementById('receipt-items-list');
         receiptList.innerHTML = '';
         let totalPins = 0;
         let totalAmount = 0;
 
-        // Combine (Aggregate) identical items in the basket
         const aggregatedBasket = {};
         orderBasket.forEach(item => {
             totalPins += item.pinQty;
-            totalAmount += item.price;
+            const isHolo = holoUpgradesState[item.id];
             
-            const key = `${item.size}-${item.type}`;
+            let itemPrice = item.price;
+            if (isHolo) itemPrice += (6 * item.pinQty);
+            
+            totalAmount += itemPrice;
+            
+            const key = `${item.size}-${item.type}-${isHolo ? 'holo' : 'normal'}`;
             if (!aggregatedBasket[key]) {
                 aggregatedBasket[key] = {
                     size: item.size,
                     type: item.type,
-                    price: item.price,
+                    isHolo: isHolo,
+                    pricePerBundle: itemPrice,
                     count: 0
                 };
             }
             aggregatedBasket[key].count += 1;
-            aggregatedBasket[key].totalRowPrice = aggregatedBasket[key].count * item.price;
+            aggregatedBasket[key].totalRowPrice = aggregatedBasket[key].count * itemPrice;
         });
 
-        // Print the grouped items to the receipt
         Object.values(aggregatedBasket).forEach(group => {
             const li = document.createElement('li');
-            li.className = 'receipt-item-row';
+            li.style.display = 'flex';
+            li.style.justifyContent = 'space-between';
+            li.style.alignItems = 'center';
+            li.style.marginBottom = '12px';
+            li.style.fontSize = '0.85rem';
+            li.style.color = '#5e2e3a';
+            li.style.fontWeight = '600';
+
             li.innerHTML = `
-                <div class="receipt-item-details">
-                    <span class="receipt-item-title">${group.size}mm [${group.type}]</span>
-                    <span class="receipt-item-qty">Quantity: ${group.count}</span>
+                <div style="display: flex; flex-direction: column; text-align: left;">
+                    <span style="color: #a55166; font-weight: 700;">${group.size}mm [${group.type}] ${group.isHolo ? '✨ Holo' : ''}</span>
+                    <span style="font-size: 0.75rem; opacity: 0.55; margin-top: 2px;">Quantity: ${group.count}</span>
                 </div> 
                 <span>PHP ${group.totalRowPrice}</span>
             `;
@@ -362,7 +427,6 @@ if (submitBtn && receiptModal) {
 
         document.getElementById('receipt-final-total').innerText = 'PHP ' + totalAmount;
 
-        // Calculate Processing Time
         const isRush = document.getElementById('rush-order-checkbox').checked;
         const processingBox = document.getElementById('receipt-processing-time');
         
@@ -383,12 +447,10 @@ if (submitBtn && receiptModal) {
         receiptModal.style.display = 'flex';
     });
 
-    // 2. Close Modal Logic
     receiptModal.querySelector('.close-receipt-modal').addEventListener('click', () => {
         receiptModal.style.display = 'none';
     });
     
-    // 3. Confirm & Send to Instagram
     document.getElementById('confirm-order-btn').addEventListener('click', () => {
         const isRush = document.getElementById('rush-order-checkbox').checked;
         let orderString = "Hi! I'd like to place an order:%0A";
@@ -397,18 +459,18 @@ if (submitBtn && receiptModal) {
             orderString = "🚨 RUSH ORDER REQUEST 🚨%0A%0AHi! I'd like to place a priority order:%0A";
         }
 
-        // Aggregate again for the DM message
         const dmBasket = {};
         orderBasket.forEach(item => {
-            const key = `${item.size}-${item.type}`;
+            const isHolo = holoUpgradesState[item.id];
+            const key = `${item.size}-${item.type}-${isHolo ? 'holo' : 'normal'}`;
             if (!dmBasket[key]) {
-                dmBasket[key] = { size: item.size, type: item.type, count: 0 };
+                dmBasket[key] = { size: item.size, type: item.type, isHolo: isHolo, count: 0 };
             }
             dmBasket[key].count += 1;
         });
 
         Object.values(dmBasket).forEach(group => {
-            orderString += `- ${group.count}x ${group.size}mm [${group.type}]%0A`;
+            orderString += `- ${group.count}x ${group.size}mm [${group.type}] ${group.isHolo ? '(Rainbow Holo)' : ''}%0A`;
         });
         
         orderString += `%0ATotal: ${document.getElementById('basket-total-price').innerText}`;
