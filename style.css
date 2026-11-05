@@ -2340,26 +2340,56 @@ footer {
     gap: 10px;
 }
 
+/* 1. Main Box Setup */
 .holo-toggle-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffffff;
+    background-color: #ffffff;
     border: 1px solid #faebd7;
     padding: 12px 15px;
     border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.holo-toggle-box:hover {
-    background: #fffbd0;
-}
-
-/* Checked State for Holo Box */
+/* 2. Hover & Checked Base State (Solid Yellow) */
+.holo-toggle-box:hover,
 .holo-toggle-box:has(input:checked) {
-    background-image: linear-gradient(135deg, #fff9c0, #fcd2dc);
-    border-color: #e988a0;
+    background-color: #fff9c0; 
+}
+
+/* 3. The Gradient Layer (Waits perfectly hidden on the left edge) */
+.holo-toggle-box::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: linear-gradient(to right, #fff9c0, #ffa3b3); /* Yellow on left, Pink on right */
+    border-radius: 11px; /* Matches the inner curves */
+    z-index: 0; /* Sits right above the background color, but behind the text */
+    
+    /* This clips the gradient to a 0px sliver on the left side */
+    clip-path: inset(0 100% 0 0); 
+    transition: clip-path 0.4s ease-out;
+}
+
+/* 4. Checked State (Removes border & wipes gradient) */
+.holo-toggle-box:has(input:checked) {
+    border-color: transparent; 
+}
+
+/* 5. The Left-to-Right Sweep Animation! */
+.holo-toggle-box:has(input:checked)::before {
+    /* Unclips the gradient, sweeping it open from left to right */
+    clip-path: inset(0 0 0 0);
+}
+
+/* 6. Keeps the text and checkbox floating safely above the gradient layer */
+.holo-info, .holo-custom-check {
+    position: relative;
+    z-index: 2;
 }
 
 .holo-info {
@@ -2388,13 +2418,26 @@ footer {
     height: 22px;
     border: 2px solid #e988a0;
     border-radius: 6px;
-    display: grid;
-    place-content: center;
+    /* Use flexbox to perfectly center the inner yellow square */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; 
+    transition: all 0.2s ease;
+}
+
+.holo-checkbox:checked + .holo-custom-check {
+    background-color: transparent; 
 }
 
 .holo-checkbox:checked + .holo-custom-check::before {
-    content: "✨";
-    font-size: 0.85rem;
+    content: "";
+    width: 12px;  /* Smaller than the 22px box to create the gap */
+    height: 12px;
+    background-color: #fdf6c6; /* Your theme's soft yellow */
+    border-radius: 3px; /* Slightly rounded corners for the inner box */
+    display: block;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.1); /* Optional: tiny shadow to make it pop */
 }
 
 /* ==========================================
