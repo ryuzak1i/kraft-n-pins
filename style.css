@@ -2332,12 +2332,38 @@ footer {
     border-radius: 20px;
     border: 2px dashed #f19fb3;
     cursor: pointer;
+    
+    /* NEW: Forces both buttons to be exactly this wide */
+    min-width: 120px; 
+    
+    /* Centers the text and the sparkle icon inside the fixed width */
+    display: inline-flex; 
+    justify-content: center;
+    align-items: center;
 }
 
 #holo-items-wrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+/* ==========================================
+   THE SOFT FADE-SWEEP ANIMATION
+   ========================================== */
+@keyframes smoothSweepFade {
+    0% { 
+        opacity: 0; 
+        background-position: 100% center; /* Starts anchored on the pure yellow third */
+    }
+    30% {
+        opacity: 1; /* Quickly fades in the pure yellow */
+        background-position: 100% center; 
+    }
+    100% { 
+        opacity: 1; 
+        background-position: 0% center; /* Softly sweeps the pink in, stopping on the right edge */
+    }
 }
 
 /* 1. Main Box Setup */
@@ -2352,41 +2378,42 @@ footer {
     cursor: pointer;
     position: relative;
     z-index: 1;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; 
 }
 
-/* 2. Hover & Checked Base State (Solid Yellow) */
-.holo-toggle-box:hover,
-.holo-toggle-box:has(input:checked) {
+/* 2. Hover State (Turns Solid Yellow) */
+.holo-toggle-box:hover {
     background-color: #fff9c0; 
 }
 
-/* 3. The Gradient Layer (Waits perfectly hidden on the left edge) */
 .holo-toggle-box::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-image: linear-gradient(to right, #fff9c0, #ffa3b3); /* Yellow on left, Pink on right */
-    border-radius: 11px; /* Matches the inner curves */
-    z-index: 0; /* Sits right above the background color, but behind the text */
+    z-index: 0; 
+    border-radius: 11px;
     
-    /* This clips the gradient to a 0px sliver on the left side */
-    clip-path: inset(0 100% 0 0); 
-    transition: clip-path 0.4s ease-out;
+    /* The soft map: Yellow -> Pink -> Yellow -> Yellow */
+    /* Because it is stretched over 300%, there are absolutely no hard lines */
+    background-image: linear-gradient(to right, #fff9c0 0%, #ffa3b3 33.33%, #fff9c0 66.66%, #fff9c0 100%);
+    background-size: 300% 100%;
+    
+    opacity: 0; /* Stays hidden by default */
 }
 
-/* 4. Checked State (Removes border & wipes gradient) */
+/* 4. Checked State (Locks Yellow base & Removes Border) */
 .holo-toggle-box:has(input:checked) {
+    background-color: #fff9c0; 
     border-color: transparent; 
 }
 
-/* 5. The Left-to-Right Sweep Animation! */
+/* 5. Trigger the Sweeping Fade via Keyframes! */
 .holo-toggle-box:has(input:checked)::before {
-    /* Unclips the gradient, sweeping it open from left to right */
-    clip-path: inset(0 0 0 0);
+    /* Runs the reversed sweeping animation */
+    animation: smoothSweepFade 0.7s ease-out forwards;
 }
 
-/* 6. Keeps the text and checkbox floating safely above the gradient layer */
+/* 6. Keeps the text safely above the animation */
 .holo-info, .holo-custom-check {
     position: relative;
     z-index: 2;
