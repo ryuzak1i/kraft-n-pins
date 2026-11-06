@@ -415,10 +415,16 @@ if (submitBtn && receiptModal) {
             li.style.color = '#5e2e3a';
             li.style.fontWeight = '600';
 
+            // Creates the additional holographic line only if the upgrade was selected
+            const holoLine = group.isHolo 
+                ? `<span style="font-size: 0.75rem; opacity: 0.55; margin-top: 2px;">+ Holographic</span>` 
+                : '';
+
             li.innerHTML = `
                 <div style="display: flex; flex-direction: column; text-align: left;">
-                    <span style="color: #a55166; font-weight: 700;">${group.size}mm [${group.type}] ${group.isHolo ? '✨ Holo' : ''}</span>
+                    <span style="color: #a55166; font-weight: 700;">${group.size}mm [${group.type}]</span>
                     <span style="font-size: 0.75rem; opacity: 0.55; margin-top: 2px;">Quantity: ${group.count}</span>
+                    ${holoLine}
                 </div> 
                 <span>PHP ${group.totalRowPrice}</span>
             `;
