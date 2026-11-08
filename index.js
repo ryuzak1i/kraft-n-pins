@@ -387,7 +387,9 @@ if (submitBtn && receiptModal) {
             const isHolo = holoUpgradesState[item.id];
             
             let itemPrice = item.price;
-            if (isHolo) itemPrice += (6 * item.pinQty);
+            let holoAddedForThisItem = isHolo ? (6 * item.pinQty) : 0;
+            
+            if (isHolo) itemPrice += holoAddedForThisItem;
             
             totalAmount += itemPrice;
             
@@ -398,13 +400,16 @@ if (submitBtn && receiptModal) {
                     type: item.type,
                     isHolo: isHolo,
                     pricePerBundle: itemPrice,
-                    count: 0
+                    count: 0,
+                    holoAddedAmount: 0 // Tracks the total holographic price added for this group
                 };
             }
             aggregatedBasket[key].count += 1;
             aggregatedBasket[key].totalRowPrice = aggregatedBasket[key].count * itemPrice;
+            aggregatedBasket[key].holoAddedAmount += holoAddedForThisItem;
         });
 
+        // ONLY ONE LOOP to build the receipt items!
         Object.values(aggregatedBasket).forEach(group => {
             const li = document.createElement('li');
             li.style.display = 'flex';
@@ -415,9 +420,8 @@ if (submitBtn && receiptModal) {
             li.style.color = '#5e2e3a';
             li.style.fontWeight = '600';
 
-            // Creates the additional holographic line only if the upgrade was selected
             const holoLine = group.isHolo 
-                ? `<span style="font-size: 0.75rem; opacity: 0.55; margin-top: 2px;">+ Holographic</span>` 
+                ? `<span style="font-size: 0.75rem; opacity: 0.55; margin-top: 2px;">Holo: + PHP ${group.holoAddedAmount}</span>` 
                 : '';
 
             li.innerHTML = `
@@ -431,6 +435,7 @@ if (submitBtn && receiptModal) {
             receiptList.appendChild(li);
         });
 
+        // Set Total
         document.getElementById('receipt-final-total').innerText = 'PHP ' + totalAmount;
 
         const isRush = document.getElementById('rush-order-checkbox').checked;

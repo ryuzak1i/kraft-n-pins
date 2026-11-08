@@ -2616,6 +2616,22 @@ footer {
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid #faebd7;
+    
+    /* THE FIX: Caps the height and enables internal vertical scrolling */
+    max-height: 55vh; 
+    overflow-y: auto; 
+}
+
+/* Optional: Styles the new scrollbar so it matches your cute pink theme! */
+.receipt-body::-webkit-scrollbar {
+    width: 6px;
+}
+.receipt-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.receipt-body::-webkit-scrollbar-thumb {
+    background-color: #f19fb3;
+    border-radius: 10px;
 }
 
 #receipt-items-list {
