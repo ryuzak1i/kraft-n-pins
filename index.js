@@ -457,32 +457,118 @@ if (submitBtn && receiptModal) {
         receiptModal.style.display = 'none';
     });
     
-    document.getElementById('confirm-order-btn').addEventListener('click', () => {
-        const isRush = document.getElementById('rush-order-checkbox').checked;
-        let orderString = "Hi! I'd like to place an order:%0A";
+    // PUT YOUR COPIED GOOGLE APPS SCRIPT WEB APP URL HERE:
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-JvP3X8m4sWO94lll537NLbr8-QV3mwWyRB-3EHt7jmDOcwKSWh85biA_4gUjmkmE/exec";
+
+    // Helper function to turn image files into text data (Base64) to send to Google
+    const getBase64 = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const base64Data = reader.result.split(',')[1];
+            resolve(base64Data);
+        };
+        reader.onerror = error => reject(error);
+    });
+
+    document.getElementById('confirm-order-btn').addEventListener('click', async function() {
+        // 1. Gather Customer Inputs
+        const name = document.getElementById('cust-name').value.trim();
+        const ig = document.getElementById('cust-ig').value.trim();
+        const phone = document.getElementById('cust-phone').value.trim();
+        const paymentRadio = document.querySelector('input[name="payment_method"]:checked');
         
-        if (isRush) {
-            orderString = "🚨 RUSH ORDER REQUEST 🚨%0A%0AHi! I'd like to place a priority order:%0A";
+        // Validation
+        if (!name || !ig || !phone) {
+            alert("Please fill out all your contact details!");
+            return;
+        }
+        if (!paymentRadio) {
+            alert("Please select a Payment Method!");
+            return;
         }
 
-        const dmBasket = {};
-        orderBasket.forEach(item => {
-            const isHolo = holoUpgradesState[item.id];
-            const key = `${item.size}-${item.type}-${isHolo ? 'holo' : 'normal'}`;
-            if (!dmBasket[key]) {
-                dmBasket[key] = { size: item.size, type: item.type, isHolo: isHolo, count: 0 };
-            }
-            dmBasket[key].count += 1;
-        });
+        // 2. Button Loading State
+        const submitBtn = this;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+        submitBtn.disabled = true;
 
-        Object.values(dmBasket).forEach(group => {
-            orderString += `- ${group.count}x ${group.size}mm [${group.type}] ${group.isHolo ? '(Rainbow Holo)' : ''}%0A`;
-        });
+        // 3. Process Uploaded Images to Base64
+        let imagePromises = [];
+        for (let size in uploadedFilesState) {
+            let files = uploadedFilesState[size];
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                imagePromises.push(getBase64(file).then(base64 => ({
+                    size: size,
+                    filename: file.name,
+                    mimeType: file.type,
+                    base64: base64
+                })));
+            }
+        }
         
-        orderString += `%0ATotal: ${document.getElementById('basket-total-price').innerText}`;
-        
-        window.open(`https://ig.me/m/kraftnpins?text=${orderString}`, '_blank');
-        receiptModal.style.display = 'none';
+        try {
+            // Wait for all images to finish converting before sending
+            const base64Images = await Promise.all(imagePromises);
+            
+            // 4. Package the Order Data
+            const payload = {
+                items: orderBasket.map(item => ({
+                    size: item.size,
+                    type: item.type,
+                    count: item.pinQty,
+                    isHolo: holoUpgradesState[item.id],
+                    price: item.price + (holoUpgradesState[item.id] ? 6 * item.pinQty : 0)
+                })),
+                images: base64Images, // Attaches the converted images here
+                customer: {
+                    name: name,
+                    ig: ig,
+                    phone: phone,
+                    payment: paymentRadio.value
+                }
+            };
+
+            // 5. Send to Google Apps Script
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(payload)
+            });
+            
+            const data = await response.json();
+            
+            if (data.status === "success") {
+                submitBtn.innerHTML = 'Order Sent! 💖';
+                setTimeout(() => {
+                    receiptModal.style.display = 'none';
+                    orderBasket = []; 
+                    
+                    // Clear files and form
+                    uploadedFilesState = { '25': [], '32': [], '58': [] };
+                    document.getElementById('cust-name').value = '';
+                    document.getElementById('cust-ig').value = '';
+                    document.getElementById('cust-phone').value = '';
+                    if(paymentRadio) paymentRadio.checked = false;
+                    
+                    updateBasketUI();
+                    
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    alert("Thank you! Your order has been placed.");
+                }, 1500);
+            } else {
+                throw new Error(data.message || "Script returned an error");
+            }
+        } catch (error) {
+            console.error("Error submitting order:", error);
+            submitBtn.innerHTML = "Error! Try Again";
+            submitBtn.disabled = false;
+            alert("There was a problem sending your order. Please try again.");
+        }
     });
 }
 
