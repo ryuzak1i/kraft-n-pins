@@ -518,7 +518,9 @@ if (submitBtn && receiptModal) {
             // Wait for all images to finish converting before sending
             const base64Images = await Promise.all(imagePromises);
             
-            // 4. Package the Order Data
+           // 4. Package the Order Data
+            const isRushStatus = document.getElementById('rush-order-checkbox').checked; // Grabs the rush status
+            
             const payload = {
                 items: orderBasket.map(item => ({
                     size: item.size,
@@ -527,13 +529,14 @@ if (submitBtn && receiptModal) {
                     isHolo: holoUpgradesState[item.id],
                     price: item.price + (holoUpgradesState[item.id] ? 6 * item.pinQty : 0)
                 })),
-                images: base64Images, // Attaches the converted images here
+                images: base64Images, 
                 customer: {
                     name: name,
                     ig: ig,
                     phone: phone,
                     payment: paymentRadio.value
-                }
+                },
+                isRush: isRushStatus // Sends it to Google!
             };
 
             // 5. Send to Google Apps Script
