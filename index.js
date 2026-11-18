@@ -111,6 +111,9 @@ function updateBasketUI() {
 
     document.getElementById('basket-total-price').innerText = 'PHP ' + totalAmount;
     updateDropZones(sizeCounts);
+    
+    const floatingTotal = document.getElementById('mobile-floating-total');
+    if (floatingTotal) floatingTotal.innerText = '₱ ' + totalAmount;
 
     // Event listeners for individual checkboxes
     document.querySelectorAll('.holo-checkbox').forEach(box => {
@@ -626,4 +629,56 @@ function openPreviewModal(files, size) {
     });
 
     modal.style.display = 'flex'; 
+}
+
+// ==========================================
+// MOBILE BOTTOM SHEET & SWIPE LOGIC
+// ==========================================
+const mobileFloatingBtn = document.getElementById('mobile-floating-basket-btn');
+const mobileOverlay = document.getElementById('mobile-basket-overlay');
+const basketSidebar = document.querySelector('.basket-sidebar');
+const closeMobileBasket = document.getElementById('close-mobile-basket');
+
+if (mobileFloatingBtn && basketSidebar) {
+    // 1. Function to Toggle the Drawer
+    function toggleBottomSheet() {
+        basketSidebar.classList.toggle('open-sheet');
+        if (basketSidebar.classList.contains('open-sheet')) {
+            mobileOverlay.style.display = 'flex';
+            document.body.classList.add('no-scroll');
+        } else {
+            mobileOverlay.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        }
+    }
+
+    // 2. Click Listeners
+    mobileFloatingBtn.addEventListener('click', toggleBottomSheet);
+    closeMobileBasket.addEventListener('click', toggleBottomSheet);
+    mobileOverlay.addEventListener('click', toggleBottomSheet);
+
+    // 3. True Swipe-Down Gesture Recognition
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    // Detects when the user touches the basket
+    basketSidebar.addEventListener('touchstart', e => {
+        touchStartY = e.changedTouches[0].screenY;
+    });
+
+    // Detects when the user lifts their finger
+    basketSidebar.addEventListener('touchend', e => {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        // If the user swiped downwards by more than 60 pixels...
+        if (touchEndY - touchStartY > 60) {
+            // ...and the basket is currently open, close it!
+            if (basketSidebar.classList.contains('open-sheet')) {
+                toggleBottomSheet();
+            }
+        }
+    }
 }
